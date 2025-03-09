@@ -22,8 +22,8 @@ func init() {
 func deviceValues(ctx *gin.Context) {
 	d := internal.GetDevice(ctx.Param("id"))
 	if d == nil {
-		curd.Fail(ctx, "device not found")
+		api.Fail(ctx, "device not found")
 		return
 	}
-	curd.OK(ctx, d)
+	api.OK(ctx, d)
 }

@@ -23,7 +23,7 @@ func subscribe() {
 		d := devices.Load(id)
 		if d == nil {
 			d = &Device{}
-			has, err := db.Engine.ID(id).Get(d)
+			has, err := db.Engine().ID(id).Get(d)
 			if err != nil {
 				log.Error(err)
 				return

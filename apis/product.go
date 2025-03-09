@@ -25,22 +25,22 @@ func init() {
 
 func productConfig(ctx *gin.Context) {
 	var config types.ProductConfig
-	has, err := db.Engine.ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Get(&config)
+	has, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Get(&config)
 	if err != nil {
-		curd.Error(ctx, err)
+		api.Error(ctx, err)
 		return
 	}
 	if !has {
-		curd.Fail(ctx, "找不到配置文件")
+		api.Fail(ctx, "找不到配置文件")
 		return
 	}
-	curd.OK(ctx, config.Content)
+	api.OK(ctx, config.Content)
 }
 
 func productConfigUpdate(ctx *gin.Context) {
 	body, err := io.ReadAll(ctx.Request.Body)
 	if err != nil {
-		curd.Error(ctx, err)
+		api.Error(ctx, err)
 		return
 	}
 
@@ -50,19 +50,19 @@ func productConfigUpdate(ctx *gin.Context) {
 		Content: string(body),
 	}
 
-	cnt, err := db.Engine.ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Cols("content").Update(&config)
+	cnt, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Cols("content").Update(&config)
 	if err != nil {
-		curd.Error(ctx, err)
+		api.Error(ctx, err)
 		return
 	}
 	if cnt == 0 {
-		curd.Fail(ctx, "找不到配置文件")
-		_, err = db.Engine.InsertOne(&config)
+		api.Fail(ctx, "找不到配置文件")
+		_, err = db.Engine().InsertOne(&config)
 		if err != nil {
-			curd.Error(ctx, err)
+			api.Error(ctx, err)
 			return
 		}
 	}
 
-	curd.OK(ctx, nil)
+	api.OK(ctx, nil)
 }
