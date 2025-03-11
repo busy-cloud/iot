@@ -1,9 +1,8 @@
-package apis
+package internal
 
 import (
 	"github.com/busy-cloud/boat/api"
 	"github.com/busy-cloud/boat/curd"
-	"github.com/busy-cloud/iot/internal"
 	"github.com/busy-cloud/iot/types"
 	"github.com/gin-gonic/gin"
 )
@@ -20,7 +19,7 @@ func init() {
 }
 
 func deviceValues(ctx *gin.Context) {
-	d := internal.GetDevice(ctx.Param("id"))
+	d := devices.Load(ctx.Param("id"))
 	if d == nil {
 		api.Fail(ctx, "device not found")
 		return

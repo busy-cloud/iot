@@ -1,4 +1,4 @@
-package apis
+package internal
 
 import (
 	"github.com/busy-cloud/boat/api"
