@@ -5,6 +5,7 @@ go 1.23.0
 require (
 	github.com/busy-cloud/boat v0.1.0
 	github.com/gin-gonic/gin v1.10.0
+	github.com/spf13/cast v1.7.1
 	xorm.io/xorm v1.3.9
 )
 
@@ -51,7 +52,6 @@ require (
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.12.0 // indirect
-	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
