@@ -29,12 +29,12 @@ func (p *PointBit) Encode(data any) ([]byte, error) {
 func (p *PointBit) Parse(address uint16, buf []byte) (any, error) {
 	l := len(buf)
 	offset := int(p.Address - address)
-	if offset > l*8 {
-		return nil, errors.New("长度不够")
-	}
-
 	cur := offset / 8
 	bit := offset % 8
+
+	if cur >= l {
+		return nil, errors.New("长度不够")
+	}
 
 	ret := buf[cur] & (1 << bit)
 
