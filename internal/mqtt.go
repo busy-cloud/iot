@@ -42,7 +42,7 @@ func subscribe() {
 	})
 
 	mqtt.SubscribeStruct[protocol.Protocol]("iot/protocol/register", func(topic string, proto *protocol.Protocol) {
-		protocols.Store(proto.Name, proto)
+		protocol.Store(proto)
 	})
 
 }

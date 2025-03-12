@@ -1,17 +1,16 @@
-package internal
+package protocol
 
 import (
 	"github.com/busy-cloud/boat/api"
-	"github.com/busy-cloud/iot/protocol"
 	"github.com/gin-gonic/gin"
 )
 
 func init() {
 
 	api.Register("GET", "protocol/list", func(ctx *gin.Context) {
-		var ps []*protocol.Protocol
-		protocols.Range(func(name string, item *protocol.Protocol) bool {
-			ps = append(ps, &protocol.Protocol{
+		var ps []*Protocol
+		protocols.Range(func(name string, item *Protocol) bool {
+			ps = append(ps, &Protocol{
 				Name:        item.Name,
 				Description: item.Description,
 			})

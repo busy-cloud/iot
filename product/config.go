@@ -15,10 +15,12 @@ type _config struct {
 	content any
 }
 
-var configs lib.Map[_config]
+var cache lib.Map[_config]
 
 func LoadConfig[T any](id, config string) (error, *T) {
-	c := configs.Load(id + "/" + config)
+	idd := id + "/" + config
+
+	c := cache.Load(idd)
 	if c != nil {
 		now := time.Now().Unix()
 		// 10分钟内，不会重查
@@ -42,6 +44,12 @@ func LoadConfig[T any](id, config string) (error, *T) {
 	if err != nil {
 		return err, nil
 	}
+
+	//缓存下来
+	cache.Store(idd, &_config{
+		load:    time.Now().Unix(),
+		content: &t,
+	})
 
 	return nil, &t
 }

@@ -3,6 +3,8 @@ package boot
 import (
 	"github.com/busy-cloud/boat/boot"
 	"github.com/busy-cloud/iot/internal"
+	_ "github.com/busy-cloud/iot/product"
+	_ "github.com/busy-cloud/iot/protocol"
 )
 
 func init() {
