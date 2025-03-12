@@ -1,4 +1,4 @@
-package types
+package device
 
 import (
 	"github.com/busy-cloud/boat/db"

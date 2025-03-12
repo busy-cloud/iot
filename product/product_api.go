@@ -4,24 +4,23 @@ import (
 	"github.com/busy-cloud/boat/api"
 	"github.com/busy-cloud/boat/curd"
 	"github.com/busy-cloud/boat/db"
-	"github.com/busy-cloud/iot/types"
 	"github.com/gin-gonic/gin"
 	"io"
 	"xorm.io/xorm/schemas"
 )
 
 func init() {
-	api.Register("GET", "product/list", curd.ApiList[types.Product]())
-	api.Register("POST", "product/create", curd.ApiCreate[types.Product]())
-	api.Register("GET", "product/:id", curd.ParseParamStringId, curd.ApiGet[types.Product]())
-	api.Register("POST", "product/:id", curd.ParseParamStringId, curd.ApiUpdate[types.Product]("id", "name", "description", "type", "version", "protocol", "disabled"))
-	api.Register("GET", "product/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.Product]())
-	api.Register("GET", "product/:id/enable", curd.ParseParamStringId, curd.ApiDisable[types.Product](false))
-	api.Register("GET", "product/:id/disable", curd.ParseParamStringId, curd.ApiDisable[types.Product](true))
+	api.Register("GET", "product/list", curd.ApiList[Product]())
+	api.Register("POST", "product/create", curd.ApiCreate[Product]())
+	api.Register("GET", "product/:id", curd.ParseParamStringId, curd.ApiGet[Product]())
+	api.Register("POST", "product/:id", curd.ParseParamStringId, curd.ApiUpdate[Product]("id", "name", "description", "type", "version", "protocol", "disabled"))
+	api.Register("GET", "product/:id/delete", curd.ParseParamStringId, curd.ApiDelete[Product]())
+	api.Register("GET", "product/:id/enable", curd.ParseParamStringId, curd.ApiDisable[Product](false))
+	api.Register("GET", "product/:id/disable", curd.ParseParamStringId, curd.ApiDisable[Product](true))
 
 	//物模型
-	api.Register("GET", "product/:id/model", curd.ApiGet[types.ProductModel]())
-	api.Register("POST", "product/:id/model", curd.ApiUpdate[types.ProductModel]("properties", "events", "actions"))
+	api.Register("GET", "product/:id/model", curd.ApiGet[ProductModel]())
+	api.Register("POST", "product/:id/model", curd.ApiUpdate[ProductModel]("properties", "events", "actions"))
 
 	//配置接口，一般用于协议点表等
 	api.Register("GET", "product/:id/config/:config", productConfig)
@@ -29,7 +28,7 @@ func init() {
 }
 
 func productConfig(ctx *gin.Context) {
-	var config types.ProductConfig
+	var config ProductConfig
 	has, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Get(&config)
 	if err != nil {
 		api.Error(ctx, err)
@@ -49,7 +48,7 @@ func productConfigUpdate(ctx *gin.Context) {
 		return
 	}
 
-	config := types.ProductConfig{
+	config := ProductConfig{
 		Id:      ctx.Param("id"),
 		Name:    ctx.Param("name"),
 		Content: string(body),

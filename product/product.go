@@ -1,4 +1,4 @@
-package types
+package product
 
 import (
 	"github.com/busy-cloud/boat/db"

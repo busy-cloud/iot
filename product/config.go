@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/busy-cloud/boat/db"
 	"github.com/busy-cloud/boat/lib"
-	"github.com/busy-cloud/iot/types"
 	"time"
 	"xorm.io/xorm/schemas"
 )
@@ -29,7 +28,7 @@ func LoadConfig[T any](id, config string) (error, *T) {
 		}
 	}
 
-	var cfg types.ProductConfig
+	var cfg ProductConfig
 
 	has, err := db.Engine().ID(schemas.PK{id, config}).Get(&cfg)
 	if err != nil {

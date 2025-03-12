@@ -2,12 +2,12 @@ package internal
 
 import (
 	"github.com/busy-cloud/boat/lib"
-	"github.com/busy-cloud/iot/types"
+	"github.com/busy-cloud/iot/device"
 	"time"
 )
 
 type Device struct {
-	types.Device `xorm:"extends"`
+	device.Device `xorm:"extends"`
 
 	Values  map[string]any `json:"values"`
 	Updated time.Time      `json:"updated"`
