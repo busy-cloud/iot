@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	boot.Register("product", &boot.Task{
+	boot.Register("iot", &boot.Task{
 		Startup:  internal.Startup,
 		Shutdown: nil,
 		Depends:  []string{"log", "mqtt", "database"},
