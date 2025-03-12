@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	db.Register(&Product{}, &ProductConfig{})
+	db.Register(&Product{}, &ProductConfig{}, &ProductModel{})
 }
 
 type Product struct {
@@ -36,4 +36,32 @@ type Property struct {
 	Default   any    `json:"default,omitempty"`  //默认值
 	Writable  bool   `json:"writable,omitempty"` //是否可写
 	History   bool   `json:"history,omitempty"`  //是否保存历史
+}
+
+type Parameter struct {
+	Name string `json:"name,omitempty"`
+	Type string `json:"type,omitempty"`
+}
+
+type Event struct {
+	Name        string      `json:"name,omitempty"`
+	Description string      `json:"description,omitempty"`
+	Parameters  []Parameter `json:"parameters,omitempty"`
+}
+
+type Action struct {
+	Name        string      `json:"name,omitempty"`
+	Description string      `json:"description,omitempty"`
+	Parameters  []Parameter `json:"parameters,omitempty"`
+	Returns     []Parameter `json:"returns,omitempty"`
+}
+
+type ProductModel struct {
+	Id         string      `json:"id,omitempty" xorm:"pk"`
+	Version    string      `json:"version,omitempty" xorm:"version"`
+	Properties []*Property `json:"properties,omitempty" xorm:"json"`
+	Events     []*Event    `json:"events,omitempty" xorm:"json"`
+	Actions    []*Action   `json:"actions,omitempty" xorm:"json"`
+	Updated    time.Time   `json:"updated,omitempty" xorm:"updated"`
+	Created    time.Time   `json:"created,omitempty" xorm:"created"`
 }
