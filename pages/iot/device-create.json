@@ -37,6 +37,7 @@
     }
   ],
   "submit_api": "iot/device/create",
+  "submit_success": "this.navigate('/page/iot/device-detail?id='+data.id)",
   "methods": {
    }
 }

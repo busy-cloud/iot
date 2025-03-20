@@ -3,7 +3,7 @@ module github.com/busy-cloud/iot
 go 1.23.0
 
 require (
-	github.com/busy-cloud/boat v0.1.3
+	github.com/busy-cloud/boat v0.2.0
 	github.com/busy-cloud/connector v0.1.3
 	github.com/busy-cloud/modbus v0.1.7
 	github.com/gin-gonic/gin v1.10.0

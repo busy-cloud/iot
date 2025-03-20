@@ -36,6 +36,7 @@
     }
   ],
   "submit_api": "iot/product/create",
+  "submit_success": "this.navigate('/page/iot/product-detail?id='+data.id)",
   "methods": {
   }
 }
