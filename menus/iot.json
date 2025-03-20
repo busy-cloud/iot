@@ -1,0 +1,19 @@
+{
+  "name": "物联网",
+  "icon": "link",
+  "index": 200,
+  "items": [
+    {
+      "name": "产品",
+      "url": "page/iot/product"
+    },
+    {
+      "name": "设备",
+      "url": "page/iot/device"
+    },
+    {
+      "name": "协议",
+      "url": "page/iot/protocol"
+    }
+  ]
+}

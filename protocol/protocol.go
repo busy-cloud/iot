@@ -1,6 +1,7 @@
 package protocol
 
 import (
+	"github.com/busy-cloud/boat/app"
 	"github.com/busy-cloud/boat/lib"
 	"github.com/busy-cloud/boat/mqtt"
 	"github.com/busy-cloud/boat/smart"
@@ -15,12 +16,10 @@ type Protocol struct {
 	Options     *smart.Form `json:"options,omitempty"`
 }
 
-func Register(p *Protocol) error {
-	tk := mqtt.Publish("iot/protocol/register", p)
-	tk.Wait()
-	return tk.Error()
-}
-
-func Store(p *Protocol) {
-	protocols.Store(p.Name, p)
+func Register(id string, protocol *Protocol) {
+	if app.Name == "" || app.Name == "boat" {
+		protocols.Store(id, protocol)
+	} else {
+		mqtt.Publish("iot/protocol/register", protocol)
+	}
 }

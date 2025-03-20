@@ -5,7 +5,6 @@ import (
 	"github.com/busy-cloud/boat/db"
 	"github.com/busy-cloud/boat/log"
 	"github.com/busy-cloud/boat/mqtt"
-	"github.com/busy-cloud/iot/protocol"
 	"strings"
 	"time"
 )
@@ -39,10 +38,6 @@ func subscribe() {
 		//更新数据
 		d.Values = values
 		d.Updated = time.Now()
-	})
-
-	mqtt.SubscribeStruct[protocol.Protocol]("iot/protocol/register", func(topic string, proto *protocol.Protocol) {
-		protocol.Store(proto)
 	})
 
 }

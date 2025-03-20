@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-	api.Register("GET", "protocol/list", func(ctx *gin.Context) {
+	api.Register("GET", "iot/protocol/list", func(ctx *gin.Context) {
 		var ps []*Protocol
 		protocols.Range(func(name string, item *Protocol) bool {
 			ps = append(ps, &Protocol{
@@ -19,7 +19,7 @@ func init() {
 		api.OK(ctx, ps)
 	})
 
-	api.Register("GET", "protocol/:name", func(ctx *gin.Context) {
+	api.Register("GET", "iot/protocol/:name", func(ctx *gin.Context) {
 		name := protocols.Load(ctx.Param("name"))
 		if name != nil {
 			api.OK(ctx, name)
@@ -28,7 +28,7 @@ func init() {
 		}
 	})
 
-	api.Register("GET", "protocol/:name/option", func(ctx *gin.Context) {
+	api.Register("GET", "iot/protocol/:name/option", func(ctx *gin.Context) {
 		name := protocols.Load(ctx.Param("name"))
 		if name != nil {
 			api.OK(ctx, name.Options)
@@ -37,7 +37,7 @@ func init() {
 		}
 	})
 
-	api.Register("GET", "protocol/:name/station", func(ctx *gin.Context) {
+	api.Register("GET", "iot/protocol/:name/station", func(ctx *gin.Context) {
 		name := protocols.Load(ctx.Param("name"))
 		if name != nil {
 			api.OK(ctx, name.Station)

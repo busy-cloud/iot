@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	api.Register("GET", "device/:id/values", curd.ParseParamStringId, deviceValues)
+	api.Register("GET", "iot/device/:id/values", curd.ParseParamStringId, deviceValues)
 }
 
 func deviceValues(ctx *gin.Context) {
