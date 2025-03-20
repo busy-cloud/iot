@@ -1,0 +1,15 @@
+{
+  "title": "协议库",
+  "template": "table",
+  "columns": [
+    {
+      "key": "name",
+      "label": "名称"
+    },
+    {
+      "key": "description",
+      "label": "说明"
+    }
+  ],
+  "data_api": "iot/protocol/list"
+}

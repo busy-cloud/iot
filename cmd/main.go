@@ -6,6 +6,7 @@ import (
 	"github.com/busy-cloud/boat/menu"
 	"github.com/busy-cloud/boat/page"
 	"github.com/busy-cloud/boat/web"
+	_ "github.com/busy-cloud/iot/internal"
 	"github.com/spf13/viper"
 	"os"
 	"os/signal"
@@ -15,6 +16,7 @@ import (
 func init() {
 	//测试
 	page.Dir("pages", "")
+
 	menu.Dir("menus", "")
 }
 

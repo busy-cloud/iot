@@ -4,7 +4,7 @@ import (
 	"embed"
 	"github.com/busy-cloud/boat/menu"
 	"github.com/busy-cloud/boat/page"
-	_ "github.com/busy-cloud/iot/boot"
+	_ "github.com/busy-cloud/iot/internal"
 )
 
 //go:embed pages

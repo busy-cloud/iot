@@ -1,0 +1,70 @@
+{
+  "title": "设备详情",
+  "template": "info",
+  "toolbar": [
+    {
+      "icon": "edit",
+      "type": "button",
+      "label": "编辑",
+      "action": {
+        "type": "page",
+        "app": "iot",
+        "page": "device-edit",
+        "params_func": "return {id: data.id}"
+      }
+    },
+    {
+      "icon": "delete",
+      "type": "button",
+      "label": "删除",
+      "confirm": "确认删除？",
+      "action": {
+        "type": "script",
+        "script": "this.request.get('iot/device/'+data.id+'/delete').subscribe(res=>{this.navigate('/page/iot/device')})"
+      }
+    }
+  ],
+  "items": [
+    {
+      "key": "id",
+      "label": "ID"
+    },
+    {
+      "key": "product_id",
+      "label": "产品ID",
+      "action": {
+        "type": "page",
+        "app": "iot",
+        "page": "product-detail",
+        "params_func": "return {id: data.id}"
+      }
+    },
+    {
+      "key": "name",
+      "label": "名称"
+    },
+    {
+      "key": "description",
+      "label": "说明"
+    },
+    {
+      "key": "station",
+      "label": "地址"
+    },
+    {
+      "key": "disabled",
+      "label": "禁用"
+    }
+  ],
+  "data_api": "iot/device/:id",
+  "children": [
+    {
+      "title": "实时状态",
+      "template": "table"
+    },
+    {
+      "title": "设备日志",
+      "template": "table"
+    }
+  ]
+}

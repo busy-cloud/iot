@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func subscribe() {
+func Startup() error {
 	mqtt.Subscribe("device/+/property", func(topic string, payload []byte) {
 		ss := strings.Split(topic, "/")
 		id := ss[1]
@@ -40,4 +40,5 @@ func subscribe() {
 		d.Updated = time.Now()
 	})
 
+	return nil
 }

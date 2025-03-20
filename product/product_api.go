@@ -11,12 +11,13 @@ import (
 
 func init() {
 	api.Register("GET", "iot/product/list", curd.ApiList[Product]())
+	api.Register("POST", "iot/product/search", curd.ApiSearch[Product]())
 	api.Register("POST", "iot/product/create", curd.ApiCreate[Product]())
-	api.Register("GET", "iot/product/:id", curd.ParseParamStringId, curd.ApiGet[Product]())
-	api.Register("POST", "iot/product/:id", curd.ParseParamStringId, curd.ApiUpdate[Product]("id", "name", "description", "type", "version", "protocol", "disabled"))
-	api.Register("GET", "iot/product/:id/delete", curd.ParseParamStringId, curd.ApiDelete[Product]())
-	api.Register("GET", "iot/product/:id/enable", curd.ParseParamStringId, curd.ApiDisable[Product](false))
-	api.Register("GET", "iot/product/:id/disable", curd.ParseParamStringId, curd.ApiDisable[Product](true))
+	api.Register("GET", "iot/product/:id", curd.ApiGet[Product]())
+	api.Register("POST", "iot/product/:id", curd.ApiUpdate[Product]("id", "name", "description", "type", "version", "protocol", "disabled"))
+	api.Register("GET", "iot/product/:id/delete", curd.ApiDelete[Product]())
+	api.Register("GET", "iot/product/:id/enable", curd.ApiDisable[Product](false))
+	api.Register("GET", "iot/product/:id/disable", curd.ApiDisable[Product](true))
 
 	//物模型
 	api.Register("GET", "iot/product/:id/model", curd.ApiGet[ProductModel]())
