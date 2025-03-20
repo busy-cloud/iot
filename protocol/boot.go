@@ -3,7 +3,6 @@ package protocol
 import (
 	"github.com/busy-cloud/boat/boot"
 	"github.com/busy-cloud/boat/mqtt"
-	"strings"
 )
 
 func init() {
@@ -15,9 +14,8 @@ func init() {
 
 func Startup() error {
 
-	mqtt.SubscribeStruct[Protocol]("register/protocol/+", func(topic string, protocol *Protocol) {
-		name := strings.TrimPrefix(topic, "register/protocol/")
-		protocols.Store(name, protocol)
+	mqtt.SubscribeStruct[Protocol]("iot/register/protocol", func(topic string, protocol *Protocol) {
+		protocols.Store(protocol.Name, protocol)
 	})
 	//return Load()
 

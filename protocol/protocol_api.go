@@ -8,39 +8,36 @@ import (
 func init() {
 
 	api.Register("GET", "iot/protocol/list", func(ctx *gin.Context) {
-		var ps []*Protocol
+		var ps []*Base
 		protocols.Range(func(name string, item *Protocol) bool {
-			ps = append(ps, &Protocol{
-				Name:        item.Name,
-				Description: item.Description,
-			})
+			ps = append(ps, &item.Base)
 			return true
 		})
 		api.OK(ctx, ps)
 	})
 
 	api.Register("GET", "iot/protocol/:name", func(ctx *gin.Context) {
-		name := protocols.Load(ctx.Param("name"))
-		if name != nil {
-			api.OK(ctx, name)
+		p := protocols.Load(ctx.Param("name"))
+		if p != nil {
+			api.OK(ctx, p)
 		} else {
 			api.Fail(ctx, "协议找不到")
 		}
 	})
 
 	api.Register("GET", "iot/protocol/:name/option", func(ctx *gin.Context) {
-		name := protocols.Load(ctx.Param("name"))
-		if name != nil {
-			api.OK(ctx, name.Options)
+		p := protocols.Load(ctx.Param("name"))
+		if p != nil {
+			api.OK(ctx, p.Options)
 		} else {
 			api.Fail(ctx, "协议找不到")
 		}
 	})
 
 	api.Register("GET", "iot/protocol/:name/station", func(ctx *gin.Context) {
-		name := protocols.Load(ctx.Param("name"))
-		if name != nil {
-			api.OK(ctx, name.Station)
+		p := protocols.Load(ctx.Param("name"))
+		if p != nil {
+			api.OK(ctx, p.Station)
 		} else {
 			api.Fail(ctx, "协议找不到")
 		}
