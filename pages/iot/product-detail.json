@@ -54,12 +54,16 @@
   "data_api": "iot/product/:id",
   "children": [
     {
-      "title": "物模型",
-      "template": "table"
+      "content": {
+        "title": "物模型",
+        "template": "table"
+      }
     },
     {
-      "title": "设备列表",
-      "template": "table"
+      "content": {
+        "title": "设备列表",
+        "template": "table"
+      }
     }
   ]
 }
