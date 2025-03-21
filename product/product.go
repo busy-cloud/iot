@@ -58,7 +58,6 @@ type Action struct {
 
 type ProductModel struct {
 	Id         string      `json:"id,omitempty" xorm:"pk"`
-	Version    string      `json:"version,omitempty" xorm:"version"`
 	Properties []*Property `json:"properties,omitempty" xorm:"json"`
 	Events     []*Event    `json:"events,omitempty" xorm:"json"`
 	Actions    []*Action   `json:"actions,omitempty" xorm:"json"`

@@ -21,11 +21,32 @@ func init() {
 
 	//物模型
 	api.Register("GET", "iot/product/:id/model", curd.ApiGet[ProductModel]())
-	api.Register("POST", "iot/product/:id/model", curd.ApiUpdate[ProductModel]("properties", "events", "actions"))
+	api.Register("POST", "iot/product/:id/model", productModelUpdate)
 
 	//配置接口，一般用于协议点表等
 	api.Register("GET", "iot/product/:id/config/:config", productConfig)
 	api.Register("POST", "iot/product/:id/config/:config", productConfigUpdate)
+}
+
+func productModelUpdate(ctx *gin.Context) {
+	id := ctx.Param("id")
+
+	var model ProductModel
+	err := ctx.ShouldBind(&model)
+	if err != nil {
+		api.Error(ctx, err)
+		return
+	}
+	model.Id = id
+
+	_, err = db.Engine().ID(id).Delete(new(ProductModel)) //不管有没有都删掉
+	_, err = db.Engine().ID(id).Insert(&model)
+	if err != nil {
+		api.Error(ctx, err)
+		return
+	}
+
+	api.OK(ctx, &model)
 }
 
 func productConfig(ctx *gin.Context) {
@@ -55,19 +76,12 @@ func productConfigUpdate(ctx *gin.Context) {
 		Content: string(body),
 	}
 
-	cnt, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Cols("content").Update(&config)
+	_, err = db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Delete(new(ProductModel))
+	_, err = db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("config")}).Insert(&config)
 	if err != nil {
 		api.Error(ctx, err)
 		return
 	}
-	if cnt == 0 {
-		api.Fail(ctx, "找不到配置文件")
-		_, err = db.Engine().InsertOne(&config)
-		if err != nil {
-			api.Error(ctx, err)
-			return
-		}
-	}
 
-	api.OK(ctx, nil)
+	api.OK(ctx, &config)
 }

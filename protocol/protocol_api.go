@@ -42,4 +42,13 @@ func init() {
 			api.Fail(ctx, "协议找不到")
 		}
 	})
+
+	api.Register("GET", "iot/protocol/:name/config", func(ctx *gin.Context) {
+		p := protocols.Load(ctx.Param("name"))
+		if p != nil {
+			api.OK(ctx, p.Config)
+		} else {
+			api.Fail(ctx, "协议找不到")
+		}
+	})
 }

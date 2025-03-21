@@ -14,6 +14,17 @@
       }
     },
     {
+      "icon": "build",
+      "type": "button",
+      "label": "物模型",
+      "action": {
+        "type": "page",
+        "app": "iot",
+        "page": "product-model",
+        "params_func": "return {id: data.id}"
+      }
+    },
+    {
       "icon": "delete",
       "type": "button",
       "label": "删除",
