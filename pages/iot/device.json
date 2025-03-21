@@ -72,7 +72,8 @@
     },
     {
       "key": "station",
-      "label": "地址"
+      "label": "地址",
+      "type": "json"
     },
     {
       "key": "disabled",

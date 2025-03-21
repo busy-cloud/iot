@@ -69,6 +69,10 @@
       "label": "版本"
     },
     {
+      "key": "protocol",
+      "label": "协议"
+    },
+    {
       "key": "disabled",
       "label": "禁用",
       "type": "boolean"

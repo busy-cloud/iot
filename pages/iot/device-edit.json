@@ -12,7 +12,11 @@
       "key": "product_id",
       "label": "产品ID",
       "type": "text",
-      "required": true
+      "required": true,
+      "change_action": {
+        "type": "script",
+        "script": "setTimeout(()=>this.load_product(), 100)"
+      }
     },
     {
       "key": "name",
@@ -28,7 +32,8 @@
     {
       "key": "station",
       "label": "地址",
-      "type": "text"
+      "type": "object",
+      "children": []
     },
     {
       "key": "disabled",
@@ -39,6 +44,9 @@
   "data_api": "iot/device/:id",
   "submit_api": "iot/device/:id",
   "submit_success": "this.navigate('/page/iot/device-detail?id='+data.id)",
+  "mount": "this.load_product()",
   "methods": {
-  }
+    "load_product": "this.request.get('iot/product/'+this.editor.value.product_id).subscribe(res=>{if(!res.error) this.load_protocol_station(res.data.protocol)})",
+    "load_protocol_station": ["p", "this.request.get('iot/protocol/'+p+'/station').subscribe(res=>{this.content.fields[4].children=res.data.fields; setTimeout(()=>this.editor.build(), 200)})"]
+   }
 }

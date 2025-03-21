@@ -15,6 +15,7 @@ type Product struct {
 	Description string    `json:"description,omitempty"`
 	Type        string    `json:"type,omitempty"` //类型
 	Version     string    `json:"version,omitempty"`
+	Protocol    string    `json:"protocol,omitempty"`
 	Disabled    bool      `json:"disabled,omitempty"` //禁用
 	Created     time.Time `json:"created,omitempty" xorm:"created"`
 }
