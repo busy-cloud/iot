@@ -38,8 +38,14 @@ func LoadConfig[T any](id, config string) (error, *T) {
 		return errors.New("缺少映射"), nil
 	}
 
+	//这里转来转去
+	buf, err := json.Marshal(cfg.Content)
+	if err != nil {
+		return err, nil
+	}
+
 	var t T
-	err = json.Unmarshal([]byte(cfg.Content), &t)
+	err = json.Unmarshal(buf, &t)
 	if err != nil {
 		return err, nil
 	}

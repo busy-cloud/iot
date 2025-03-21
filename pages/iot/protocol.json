@@ -9,6 +9,18 @@
     {
       "key": "description",
       "label": "说明"
+    },
+    {
+      "key": "version",
+      "label": "版本"
+    },
+    {
+      "key": "author",
+      "label": "作者"
+    },
+    {
+      "key": "copyright",
+      "label": "版权"
     }
   ],
   "data_api": "iot/protocol/list"

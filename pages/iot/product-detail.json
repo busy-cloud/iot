@@ -65,9 +65,32 @@
   "data_api": "iot/product/:id",
   "children": [
     {
+      "params_func": "return {id: data.id}",
       "content": {
-        "title": "物模型",
-        "template": "table"
+        "title": "协议配置文件",
+        "template": "table",
+        "operators": [
+          {
+            "label": "配置文件",
+            "action": {
+              "type": "page",
+              "app": "iot",
+              "page":"product-config",
+              "params_func": "return {config:data.name, product:this.params.id}"
+            }
+          }
+        ],
+        "columns": [
+          {
+            "key": "name",
+            "label": "名称"
+          },
+          {
+            "key": "description",
+            "label": "说明"
+          }
+        ],
+        "data_api": "iot/protocol/list"
       }
     },
     {

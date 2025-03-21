@@ -20,9 +20,10 @@ type Product struct {
 }
 
 type ProductConfig struct {
-	Id      string    `json:"id,omitempty" xorm:"pk"`
+	Id      string    `json:"id" xorm:"pk"`
 	Name    string    `json:"name" xorm:"pk"` //双主键
-	Content string    `json:"content,omitempty" xorm:"text"`
+	Content any       `json:"content,omitempty" xorm:"json text"`
+	Updated time.Time `json:"updated,omitempty" xorm:"updated"`
 	Created time.Time `json:"created,omitempty" xorm:"created"`
 }
 
