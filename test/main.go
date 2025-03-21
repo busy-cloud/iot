@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/busy-cloud/boat"
 	"github.com/busy-cloud/boat/boot"
 	"github.com/busy-cloud/boat/log"
 	"github.com/busy-cloud/boat/menu"
@@ -9,6 +10,7 @@ import (
 	_ "github.com/busy-cloud/connector"
 	_ "github.com/busy-cloud/iot/internal"
 	_ "github.com/busy-cloud/modbus"
+	_ "github.com/busy-cloud/user"
 	"github.com/spf13/viper"
 	"os"
 	"os/signal"

@@ -3,22 +3,13 @@ package main
 import (
 	"github.com/busy-cloud/boat/boot"
 	"github.com/busy-cloud/boat/log"
-	"github.com/busy-cloud/boat/menu"
-	"github.com/busy-cloud/boat/page"
 	"github.com/busy-cloud/boat/web"
-	_ "github.com/busy-cloud/iot/internal"
+	_ "github.com/busy-cloud/iot"
 	"github.com/spf13/viper"
 	"os"
 	"os/signal"
 	"syscall"
 )
-
-func init() {
-	//测试
-	page.Dir("pages", "")
-
-	menu.Dir("menus", "")
-}
 
 func main() {
 	viper.SetConfigName("iot")
