@@ -57,7 +57,7 @@
       "label": "禁用"
     }
   ],
-  "data_api": "iot/device/:id",
+  "load_api": "iot/device/:id",
   "children": [
     {
       "content": {

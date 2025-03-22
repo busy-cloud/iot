@@ -77,7 +77,7 @@
       "type": "boolean"
     }
   ],
-  "data_api": "iot/product/:id",
+  "load_api": "iot/product/:id",
   "children": [
     {
       "content": {

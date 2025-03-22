@@ -3,7 +3,7 @@
   "template": "form",
   "fields": [
   ],
-  "data_api": "iot/product/:product/config/:config",
+  "load_api": "iot/product/:product/config/:config",
   "submit_api": "iot/product/:product/config/:config",
   "submit_success": "this.navigate('/page/iot/product-detail?id='+data.id)",
   "mount": "this.load_config_form()",
