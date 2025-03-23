@@ -1,6 +1,38 @@
 {
   "title": "编辑设备",
   "template": "form",
+  "toolbar": [
+    {
+      "type": "button",
+      "label": "选择产品ID",
+      "action": {
+        "type": "dialog",
+        "app": "iot",
+        "page": "product-choose",
+        "after_close": "this.editor.patchValue({product_id: result.id})"
+      }
+    },
+    {
+      "type": "button",
+      "label": "选择连接ID",
+      "action": {
+        "type": "dialog",
+        "app": "connector",
+        "page": "linker-choose",
+        "after_close": "this.editor.patchValue({linker_id: result.id})"
+      }
+    },
+    {
+      "type": "button",
+      "label": "选择TCP连接ID",
+      "action": {
+        "type": "dialog",
+        "app": "connector",
+        "page": "tcp-incoming-choose",
+        "after_close": "this.editor.patchValue({incoming_id: result.id})"
+      }
+    }
+  ],
   "fields": [
     {
       "key": "id",
@@ -57,7 +89,7 @@
   "submit_success": "this.navigate('/page/iot/device-detail?id='+data.id)",
   "mount": "this.load_product()",
   "methods": {
-    "load_product": "this.request.get('iot/product/'+this.editor.value.product_id).subscribe(res=>{if(!res.error) this.load_protocol_station(res.data.protocol)})",
+    "load_product": "this.editor.value.product_id && this.request.get('iot/product/'+this.editor.value.product_id).subscribe(res=>{if(!res.error) this.load_protocol_station(res.data.protocol)})",
     "load_protocol_station": ["p", "this.request.get('iot/protocol/'+p+'/station').subscribe(res=>{this.content.fields[6].children=res.data.fields; setTimeout(()=>this.editor.rebuild(), 200)})"]
    }
 }

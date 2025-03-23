@@ -4,8 +4,8 @@ gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a h1:lSA0F4e9A2NcQSqGq
 gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a/go.mod h1:EXuID2Zs0pAQhH8yz+DNjUbjppKQzKFAn28TMYPB6IU=
 github.com/busy-cloud/boat v0.2.4 h1:Tma2N9jC3nDyNYYsjGXfboJ3r40ljeNKEiJp9jASHfo=
 github.com/busy-cloud/boat v0.2.4/go.mod h1:rl15bgj9JKV/fQKUi+OxHRlMf36lDc62WG9AF9rhFvs=
-github.com/busy-cloud/connector v0.2.5 h1:FJvdxpP6Zu7bIT3imePdLXoPWz1S26MOQ8iWPLwg4po=
-github.com/busy-cloud/connector v0.2.5/go.mod h1:UdmvvxGXrof8vhWdYUM38qGQEkuVJC1OWJpUFWNDJVI=
+github.com/busy-cloud/connector v0.2.6 h1:THs2FpDh4eJjmxkbsXA4BRkvbV/fDZJQ3ymBE85AOX0=
+github.com/busy-cloud/connector v0.2.6/go.mod h1:UdmvvxGXrof8vhWdYUM38qGQEkuVJC1OWJpUFWNDJVI=
 github.com/busy-cloud/modbus v0.2.6 h1:9bPCkz+V38ZF2RxTgfLWWMIEV6cue9mUvNSder0ml0Q=
 github.com/busy-cloud/modbus v0.2.6/go.mod h1:ORDUdPyh9TjH29vcPe6OBacqvBD0ZBky7h5H0mU9y8U=
 github.com/busy-cloud/user v0.2.1 h1:68CMQI0Uzxj671oUIJbqCD0eUvv3qie4QEuMo5tkOPo=
