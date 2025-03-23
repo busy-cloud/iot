@@ -82,10 +82,9 @@
   "load_api": "iot/device/:id",
   "children": [
     {
-      "content": {
-        "title": "实时状态",
-        "template": "table"
-      }
+      "app": "iot",
+      "page": "device-values",
+      "params_func": "return {id: data.id}"
     },
     {
       "content": {
