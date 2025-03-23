@@ -1,6 +1,38 @@
 {
   "title": "创建设备",
   "template": "form",
+  "toolbar": [
+    {
+      "type": "button",
+      "label": "选择产品ID",
+      "action": {
+        "type": "dialog",
+        "app": "iot",
+        "page": "product-choose",
+        "after_close": "this.editor.patchValue({product_id: result.id})"
+      }
+    },
+    {
+      "type": "button",
+      "label": "选择连接ID",
+      "action": {
+        "type": "dialog",
+        "app": "connector",
+        "page": "linker-choose",
+        "after_close": "this.editor.patchValue({linker_id: result.id})"
+      }
+    },
+    {
+      "type": "button",
+      "label": "选择TCP连接ID",
+      "action": {
+        "type": "dialog",
+        "app": "iot",
+        "page": "tcp-incoming-choose",
+        "after_close": "this.editor.patchValue({incoming_id: result.id})"
+      }
+    }
+  ],
   "fields": [
     {
       "key": "id",
