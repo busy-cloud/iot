@@ -11,7 +11,9 @@ func init() {
 
 type Device struct {
 	Id          string         `json:"id,omitempty" xorm:"pk"`
-	ProductId   string         `json:"product_id" xorm:"index"`
+	ProductId   string         `json:"product_id,omitempty" xorm:"index"`
+	LinkerId    string         `json:"linker_id,omitempty" xorm:"index"`
+	IncomingId  string         `json:"incoming_id,omitempty" xorm:"index"`
 	Name        string         `json:"name,omitempty"`
 	Description string         `json:"description,omitempty"`
 	Station     map[string]any `json:"station,omitempty" xorm:"json"` //从站信息（协议定义表单）

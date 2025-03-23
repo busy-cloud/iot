@@ -9,6 +9,17 @@
       "required": true
     },
     {
+      "key": "name",
+      "label": "名称",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "description",
+      "label": "说明",
+      "type": "text"
+    },
+    {
       "key": "product_id",
       "label": "产品ID",
       "type": "text",
@@ -19,14 +30,13 @@
       }
     },
     {
-      "key": "name",
-      "label": "名称",
-      "type": "text",
-      "required": true
+      "key": "linker_id",
+      "label": "连接ID",
+      "type": "text"
     },
     {
-      "key": "description",
-      "label": "说明",
+      "key": "incoming_id",
+      "label": "TCP连接ID",
       "type": "text"
     },
     {
@@ -46,6 +56,6 @@
   "mount": "this.load_product()",
   "methods": {
     "load_product": "this.request.get('iot/product/'+this.editor.value.product_id).subscribe(res=>{if(!res.error) this.load_protocol_station(res.data.protocol)})",
-    "load_protocol_station": ["p", "this.request.get('iot/protocol/'+p+'/station').subscribe(res=>{this.content.fields[4].children=res.data.fields; setTimeout(()=>this.editor.rebuild(), 200)})"]
+    "load_protocol_station": ["p", "this.request.get('iot/protocol/'+p+'/station').subscribe(res=>{this.content.fields[6].children=res.data.fields; setTimeout(()=>this.editor.rebuild(), 200)})"]
    }
 }
