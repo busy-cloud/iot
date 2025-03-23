@@ -15,5 +15,5 @@ func deviceValues(ctx *gin.Context) {
 		api.Fail(ctx, "device not found")
 		return
 	}
-	api.OK(ctx, d)
+	api.OK(ctx, d.Values)
 }
