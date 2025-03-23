@@ -21,11 +21,11 @@ type Product struct {
 }
 
 type ProductConfig struct {
-	Id      string    `json:"id" xorm:"pk"`
-	Name    string    `json:"name" xorm:"pk"` //双主键
-	Content any       `json:"content,omitempty" xorm:"json text"`
-	Updated time.Time `json:"updated,omitempty" xorm:"updated"`
-	Created time.Time `json:"created,omitempty" xorm:"created"`
+	Id      string         `json:"id" xorm:"pk"`
+	Name    string         `json:"name" xorm:"pk"` //双主键
+	Content map[string]any `json:"content,omitempty" xorm:"json text"`
+	Updated time.Time      `json:"updated,omitempty" xorm:"updated"`
+	Created time.Time      `json:"created,omitempty" xorm:"created"`
 }
 
 // Property 属性

@@ -83,7 +83,7 @@ func productConfigUpdate(ctx *gin.Context) {
 		Content: body,
 	}
 
-	_, err = db.Engine().ID(schemas.PK{config.Id, config.Name}).Delete(new(ProductModel))
+	_, err = db.Engine().ID(schemas.PK{config.Id, config.Name}).Delete(new(ProductConfig))
 	_, err = db.Engine().ID(schemas.PK{config.Id, config.Name}).Insert(&config)
 	if err != nil {
 		api.Error(ctx, err)
