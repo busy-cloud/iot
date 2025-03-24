@@ -38,13 +38,12 @@
       "key": "id",
       "label": "ID",
       "type": "text",
-      "required": true
+      "tips": "默认随机ID"
     },
     {
       "key": "name",
       "label": "名称",
-      "type": "text",
-      "required": true
+      "type": "text"
     },
     {
       "key": "description",
@@ -55,7 +54,6 @@
       "key": "product_id",
       "label": "产品ID",
       "type": "text",
-      "required": true,
       "change_action": {
         "type": "script",
         "script": "setTimeout(()=>this.load_product(), 100)"
@@ -64,17 +62,20 @@
     {
       "key": "linker_id",
       "label": "连接ID",
-      "type": "text"
+      "type": "text",
+      "tips": "使用连接器时需要选择"
     },
     {
       "key": "incoming_id",
       "label": "TCP连接ID",
-      "type": "text"
+      "type": "text",
+      "tips": "TCP服务器时需要选择"
     },
     {
       "key": "station",
       "label": "地址",
       "type": "object",
+      "tips": "需要先选择产品ID",
       "children": []
     },
     {
