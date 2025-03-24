@@ -28,17 +28,16 @@
   "columns": [
     {
       "key": "user_id",
-      "label": "用户ID",
-      "action": {
-        "type": "page",
-        "app": "iot",
-        "page": "user-detail",
-        "params_func": "return {id: data.user_id}"
-      }
+      "label": "用户ID"
     },
     {
-      "key": "name",
-      "label": "名称"
+      "key": "user",
+      "label": "用户名"
+    },
+    {
+      "key": "admin",
+      "label": "管理员",
+      "type": "boolean"
     },
     {
       "key": "created",
