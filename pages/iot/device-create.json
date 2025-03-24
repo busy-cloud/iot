@@ -14,7 +14,7 @@
     },
     {
       "type": "button",
-      "label": "选择连接ID",
+      "label": "选择连接器ID",
       "action": {
         "type": "dialog",
         "app": "connector",
@@ -24,7 +24,7 @@
     },
     {
       "type": "button",
-      "label": "选择TCP连接ID",
+      "label": "选择TCP连接器ID",
       "action": {
         "type": "dialog",
         "app": "connector",
@@ -38,7 +38,7 @@
       "key": "id",
       "label": "ID",
       "type": "text",
-      "tips": "默认随机ID"
+      "placeholder": "默认随机ID"
     },
     {
       "key": "name",
@@ -61,21 +61,21 @@
     },
     {
       "key": "linker_id",
-      "label": "连接ID",
+      "label": "连接器ID",
       "type": "text",
-      "tips": "使用连接器时需要选择"
+      "placeholder": "使用连接器时需要选择"
     },
     {
       "key": "incoming_id",
-      "label": "TCP连接ID",
+      "label": "TCP连接器ID",
       "type": "text",
-      "tips": "TCP服务器时需要选择"
+      "placeholder": "TCP服务器时需要选择"
     },
     {
       "key": "station",
       "label": "地址",
       "type": "object",
-      "tips": "需要先选择产品ID",
+      "placeholder": "需要先选择产品ID",
       "children": []
     },
     {

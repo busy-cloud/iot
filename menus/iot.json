@@ -4,15 +4,19 @@
   "index": 200,
   "items": [
     {
-      "name": "产品",
-      "url": "page/iot/product"
-    },
-    {
       "name": "设备",
       "url": "page/iot/device"
     },
     {
-      "name": "协议",
+      "name": "项目",
+      "url": "page/iot/project"
+    },
+    {
+      "name": "产品库",
+      "url": "page/iot/product"
+    },
+    {
+      "name": "协议库",
       "url": "page/iot/protocol"
     }
   ]

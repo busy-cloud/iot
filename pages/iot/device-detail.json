@@ -49,7 +49,7 @@
     },
     {
       "key": "linker_id",
-      "label": "连接ID",
+      "label": "连接器ID",
       "type": "text",
       "action": {
         "type": "page",
@@ -60,7 +60,7 @@
     },
     {
       "key": "incoming_id",
-      "label": "TCP连接ID",
+      "label": "TCP连接器ID",
       "type": "text",
       "action": {
         "type": "page",
