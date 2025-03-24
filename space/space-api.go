@@ -1,68 +1,24 @@
 package space
 
 import (
-	"errors"
 	"github.com/busy-cloud/boat/api"
 	"github.com/busy-cloud/boat/curd"
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
 
-	api.Register("POST", "/space/count", curd.ApiCount[Space]())
+	api.Register("POST", "iot/space/count", curd.ApiCount[Space]())
 
-	api.Register("POST", "/space/search", curd.ApiSearchWith[Space]([]*curd.With{
+	api.Register("POST", "iot/space/search", curd.ApiSearchWith[Space]([]*curd.With{
 		{"space", "parent_id", "id", "name", "parent"},
 	}, "id", "name", "parent_id", "description", "disabled", "created"))
-
-	api.Register("GET", "/space/list", curd.ApiList[Space]())
-
-	api.Register("POST", "/space/create", curd.ApiCreateHook[Space](curd.GenerateID[Space](), nil))
-
-	api.Register("GET", "/space/:id", curd.ApiGet[Space]())
-
-	api.Register("POST", "/space/:id", curd.ApiUpdate[Space]())
-
-	api.Register("GET", "/space/:id/delete", curd.ApiDeleteHook[Space](nil, nil))
-
-	api.Register("GET", "/space/:id/disable", curd.ApiDisableHook[Space](true, nil, func(id any) error {
-		p := Get(id.(string))
-		if p == nil {
-			return errors.New("空间未加载")
-		}
-		//err := p.Close()
-		//if err != nil {
-		//	return err
-		//}
-		return nil
-	}))
-
-	api.Register("GET", "/space/:id/enable", curd.ApiDisableHook[Space](false, nil, func(id any) error {
-		return Load(id.(string))
-	}))
-
-	api.Register("GET", "/space/:id/start", func(ctx *gin.Context) {
-		err := Load(ctx.GetString("id"))
-		if err != nil {
-			api.Error(ctx, err)
-			return
-		}
-		api.OK(ctx, nil)
-	})
-
-	api.Register("GET", "/space/:id/stop", func(ctx *gin.Context) {
-		p := Get(ctx.GetString("id"))
-		if p == nil {
-			api.Fail(ctx, "空间未加载")
-			return
-		}
-		//err := p.Close()
-		//if err != nil {
-		//	curd.Error(ctx, err)
-		//	return
-		//}
-		api.OK(ctx, nil)
-	})
+	api.Register("GET", "iot/space/list", curd.ApiList[Space]())
+	api.Register("POST", "iot/space/create", curd.ApiCreate[Space]())
+	api.Register("GET", "iot/space/:id", curd.ApiGet[Space]())
+	api.Register("POST", "iot/space/:id", curd.ApiUpdate[Space]())
+	api.Register("GET", "iot/space/:id/delete", curd.ApiDelete[Space]())
+	api.Register("GET", "iot/space/:id/disable", curd.ApiDisable[Space](true))
+	api.Register("GET", "iot/space/:id/enable", curd.ApiDisable[Space](false))
 }
 
 // @Summary 查询空间
@@ -73,7 +29,7 @@ func init() {
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyList[Space] 返回空间信息
-// @Router /space/search [post]
+// @Router iot/space/search [post]
 func noopSpaceSearch() {}
 
 // @Summary 查询空间
@@ -84,7 +40,7 @@ func noopSpaceSearch() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyList[Space] 返回空间信息
-// @Router /space/list [get]
+// @Router iot/space/list [get]
 func noopSpaceList() {}
 
 // @Summary 创建空间
@@ -95,7 +51,7 @@ func noopSpaceList() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/create [post]
+// @Router iot/space/create [post]
 func noopSpaceCreate() {}
 
 // @Summary 修改空间
@@ -107,7 +63,7 @@ func noopSpaceCreate() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id} [post]
+// @Router iot/space/{id} [post]
 func noopSpaceUpdate() {}
 
 // @Summary 删除空间
@@ -118,7 +74,7 @@ func noopSpaceUpdate() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id}/delete [get]
+// @Router iot/space/{id}/delete [get]
 func noopSpaceDelete() {}
 
 // @Summary 启用空间
@@ -129,7 +85,7 @@ func noopSpaceDelete() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id}/enable [get]
+// @Router iot/space/{id}/enable [get]
 func noopSpaceEnable() {}
 
 // @Summary 禁用空间
@@ -140,27 +96,5 @@ func noopSpaceEnable() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id}/disable [get]
+// @Router iot/space/{id}/disable [get]
 func noopSpaceDisable() {}
-
-// @Summary 启动空间
-// @Schemes
-// @Description 启动空间
-// @Tags space
-// @Param id path int true "空间ID"
-// @Accept json
-// @Produce json
-// @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id}/start [get]
-func noopSpaceStart() {}
-
-// @Summary 停止空间
-// @Schemes
-// @Description 停止空间
-// @Tags space
-// @Param id path int true "空间ID"
-// @Accept json
-// @Produce json
-// @Success 200 {object} curd.ReplyData[Space] 返回空间信息
-// @Router /space/{id}/stop [get]
-func noopSpaceStop() {}

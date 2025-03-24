@@ -6,7 +6,6 @@ import (
 	"github.com/busy-cloud/boat/log"
 	"github.com/busy-cloud/boat/mqtt"
 	"strings"
-	"time"
 )
 
 func Startup() error {
@@ -32,13 +31,15 @@ func Startup() error {
 				log.Error("device not exist")
 				return
 			}
+			err = d.Open()
+			if err != nil {
+				log.Error(err)
+			}
+
 			devices.Store(id, d)
 		}
 
-		//更新数据
-		d.Values = values
-		d.Updated = time.Now()
-		d.Values["updated"] = d.Updated
+		d.PutValues(values)
 	})
 
 	return nil

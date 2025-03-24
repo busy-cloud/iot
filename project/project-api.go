@@ -1,87 +1,21 @@
 package project
 
 import (
-	"errors"
 	"github.com/busy-cloud/boat/api"
 	"github.com/busy-cloud/boat/curd"
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
 
-	api.Register("POST", "/project/count", curd.ApiCount[Project]())
-
-	api.Register("POST", "/project/search", curd.ApiSearchHook[Project](func(datum []*Project) error {
-		for _, v := range datum {
-			p := Get(v.Id)
-			if p != nil {
-				//v.running = p.running
-			}
-		}
-		return nil
-	}))
-
-	api.Register("GET", "/project/list", curd.ApiListHook[Project](func(datum []*Project) error {
-		for _, v := range datum {
-			p := Get(v.Id)
-			if p != nil {
-				//v.running = p.running
-			}
-		}
-		return nil
-	}))
-	api.Register("POST", "/project/create", curd.ApiCreateHook[Project](curd.GenerateID[Project](), nil))
-
-	api.Register("GET", "/project/:id", curd.ApiGetHook[Project](func(m *Project) error {
-		p := Get(m.Id)
-		if p != nil {
-			//m.running = p.running
-		}
-		return nil
-	}))
-
-	api.Register("POST", "/project/:id", curd.ApiUpdate[Project]())
-
-	api.Register("GET", "/project/:id/delete", curd.ApiDeleteHook[Project](nil, nil))
-
-	api.Register("GET", "/project/:id/disable", curd.ApiDisableHook[Project](true, nil, func(id any) error {
-		p := Get(id.(string))
-		if p == nil {
-			return errors.New("项目未加载")
-		}
-		//err := p.Close()
-		//if err != nil {
-		//	return err
-		//}
-		return nil
-	}))
-
-	api.Register("GET", "/project/:id/enable", curd.ApiDisableHook[Project](false, nil, func(id any) error {
-		return Load(id.(string))
-	}))
-
-	api.Register("GET", "/project/:id/start", func(ctx *gin.Context) {
-		err := Load(ctx.GetString("id"))
-		if err != nil {
-			api.Error(ctx, err)
-			return
-		}
-		api.OK(ctx, nil)
-	})
-
-	api.Register("GET", "/project/:id/stop", func(ctx *gin.Context) {
-		p := Get(ctx.GetString("id"))
-		if p == nil {
-			api.Fail(ctx, "项目未加载")
-			return
-		}
-		//err := p.Close()
-		//if err != nil {
-		//	api.Error(ctx, err)
-		//	return
-		//}
-		api.OK(ctx, nil)
-	})
+	api.Register("POST", "iot/project/count", curd.ApiCount[Project]())
+	api.Register("POST", "iot/project/search", curd.ApiSearch[Project]())
+	api.Register("GET", "iot/project/list", curd.ApiList[Project]())
+	api.Register("POST", "iot/project/create", curd.ApiCreate[Project]())
+	api.Register("GET", "iot/project/:id", curd.ApiGet[Project]())
+	api.Register("POST", "iot/project/:id", curd.ApiUpdate[Project]())
+	api.Register("GET", "iot/project/:id/delete", curd.ApiDelete[Project]())
+	api.Register("GET", "iot/project/:id/disable", curd.ApiDisable[Project](true))
+	api.Register("GET", "iot/project/:id/enable", curd.ApiDisable[Project](false))
 }
 
 // @Summary 查询项目
@@ -92,7 +26,7 @@ func init() {
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyList[Project] 返回项目信息
-// @Router /project/search [post]
+// @Router iot/project/search [post]
 func noopProjectSearch() {}
 
 // @Summary 查询项目
@@ -103,7 +37,7 @@ func noopProjectSearch() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyList[Project] 返回项目信息
-// @Router /project/list [get]
+// @Router iot/project/list [get]
 func noopProjectList() {}
 
 // @Summary 创建项目
@@ -114,7 +48,7 @@ func noopProjectList() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/create [post]
+// @Router iot/project/create [post]
 func noopProjectCreate() {}
 
 // @Summary 修改项目
@@ -126,7 +60,7 @@ func noopProjectCreate() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id} [post]
+// @Router iot/project/{id} [post]
 func noopProjectUpdate() {}
 
 // @Summary 删除项目
@@ -137,7 +71,7 @@ func noopProjectUpdate() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id}/delete [get]
+// @Router iot/project/{id}/delete [get]
 func noopProjectDelete() {}
 
 // @Summary 启用项目
@@ -148,7 +82,7 @@ func noopProjectDelete() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id}/enable [get]
+// @Router iot/project/{id}/enable [get]
 func noopProjectEnable() {}
 
 // @Summary 禁用项目
@@ -159,27 +93,5 @@ func noopProjectEnable() {}
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id}/disable [get]
+// @Router iot/project/{id}/disable [get]
 func noopProjectDisable() {}
-
-// @Summary 启动项目
-// @Schemes
-// @Description 启动项目
-// @Tags project
-// @Param id path int true "项目ID"
-// @Accept json
-// @Produce json
-// @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id}/start [get]
-func noopProjectStart() {}
-
-// @Summary 停止项目
-// @Schemes
-// @Description 停止项目
-// @Tags project
-// @Param id path int true "项目ID"
-// @Accept json
-// @Produce json
-// @Success 200 {object} curd.ReplyData[Project] 返回项目信息
-// @Router /project/{id}/stop [get]
-func noopProjectStop() {}

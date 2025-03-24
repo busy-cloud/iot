@@ -1,4 +1,4 @@
-package space
+package project
 
 import (
 	"github.com/busy-cloud/boat/api"
@@ -8,27 +8,27 @@ import (
 )
 
 func init() {
-	api.Register("GET", "iot/space/:id/device/list", spaceDeviceList)
-	api.Register("GET", "iot/space/:id/device/:device/bind", spaceDeviceBind)
-	api.Register("GET", "iot/space/:id/device/:device/unbind", spaceDeviceUnbind)
-	api.Register("POST", "iot/space/:id/device/:device", spaceDeviceUpdate)
+	api.Register("GET", "iot/project/:id/device/list", projectDeviceList)
+	api.Register("GET", "iot/project/:id/device/:device/bind", projectDeviceBind)
+	api.Register("GET", "iot/project/:id/device/:device/unbind", projectDeviceUnbind)
+	api.Register("POST", "iot/project/:id/device/:device", projectDeviceUpdate)
 }
 
 // @Summary 空间设备列表
 // @Schemes
 // @Description 空间设备列表
-// @Tags space-device
+// @Tags project-device
 // @Param id path int true "项目ID"
 // @Accept json
 // @Produce json
-// @Success 200 {object} curd.ReplyData[[]SpaceDevice] 返回空间设备信息
-// @Router iot/space/{id}/device/list [get]
-func spaceDeviceList(ctx *gin.Context) {
-	var pds []SpaceDevice
+// @Success 200 {object} curd.ReplyData[[]ProjectDevice] 返回空间设备信息
+// @Router iot/project/{id}/device/list [get]
+func projectDeviceList(ctx *gin.Context) {
+	var pds []ProjectDevice
 	err := db.Engine().
-		Select("space_device.space_id, space_device.device_id, space_device.name, space_device.created, device.name as device").
-		Join("INNER", "device", "device.id=space_device.device_id").
-		Where("space_device.space_id=?", ctx.Param("id")).
+		Select("project_device.project_id, project_device.device_id, project_device.name, project_device.created, device.name as device").
+		Join("INNER", "device", "device.id=project_device.device_id").
+		Where("project_device.project_id=?", ctx.Param("id")).
 		Find(&pds)
 	if err != nil {
 		api.Error(ctx, err)
@@ -40,17 +40,17 @@ func spaceDeviceList(ctx *gin.Context) {
 // @Summary 绑定空间设备
 // @Schemes
 // @Description 绑定空间设备
-// @Tags space-device
+// @Tags project-device
 // @Param id path int true "项目ID"
 // @Param device path int true "设备ID"
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[int]
-// @Router iot/space/{id}/device/{device}/bind [get]
-func spaceDeviceBind(ctx *gin.Context) {
-	pd := SpaceDevice{
-		SpaceId:  ctx.Param("id"),
-		DeviceId: ctx.Param("device"),
+// @Router iot/project/{id}/device/{device}/bind [get]
+func projectDeviceBind(ctx *gin.Context) {
+	pd := ProjectDevice{
+		ProjectId: ctx.Param("id"),
+		DeviceId:  ctx.Param("device"),
 	}
 	_, err := db.Engine().InsertOne(&pd)
 	if err != nil {
@@ -63,15 +63,15 @@ func spaceDeviceBind(ctx *gin.Context) {
 // @Summary 删除空间设备
 // @Schemes
 // @Description 删除空间设备
-// @Tags space-device
+// @Tags project-device
 // @Param id path int true "项目ID"
 // @Param device path int true "设备ID"
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[int]
-// @Router iot/space/{id}/device/{device}/unbind [get]
-func spaceDeviceUnbind(ctx *gin.Context) {
-	_, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("device")}).Delete(new(SpaceDevice))
+// @Router iot/project/{id}/device/{device}/unbind [get]
+func projectDeviceUnbind(ctx *gin.Context) {
+	_, err := db.Engine().ID(schemas.PK{ctx.Param("id"), ctx.Param("device")}).Delete(new(ProjectDevice))
 	if err != nil {
 		api.Error(ctx, err)
 		return
@@ -82,16 +82,16 @@ func spaceDeviceUnbind(ctx *gin.Context) {
 // @Summary 修改空间设备
 // @Schemes
 // @Description 修改空间设备
-// @Tags space-device
+// @Tags project-device
 // @Param id path int true "项目ID"
 // @Param device path int true "设备ID"
-// @Param space-device body SpaceDevice true "空间设备信息"
+// @Param project-device body ProjectDevice true "空间设备信息"
 // @Accept json
 // @Produce json
 // @Success 200 {object} curd.ReplyData[int]
-// @Router iot/space/{id}/device/{device} [post]
-func spaceDeviceUpdate(ctx *gin.Context) {
-	var pd SpaceDevice
+// @Router iot/project/{id}/device/{device} [post]
+func projectDeviceUpdate(ctx *gin.Context) {
+	var pd ProjectDevice
 	err := ctx.ShouldBindJSON(&pd)
 	if err != nil {
 		api.Error(ctx, err)

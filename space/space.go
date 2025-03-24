@@ -2,7 +2,6 @@ package space
 
 import (
 	"github.com/busy-cloud/boat/db"
-	"github.com/busy-cloud/iot/device"
 	"time"
 )
 
@@ -30,20 +29,4 @@ type Space struct {
 
 	Disabled bool      `json:"disabled,omitempty"`
 	Created  time.Time `json:"created" xorm:"created"`
-
-	values map[string]any
-
-	parent *Space
-
-	devices map[string]*device.Device
-}
-
-func (s *Space) PutDevice(name string, dev *device.Device) {
-	//s.devices[name] = dev
-	//s.values[name] = dev.Values()
-	//
-	//dev.Watch(func(value map[string]any) {
-	//	//此处用来触发情景模式
-	//
-	//})
 }
