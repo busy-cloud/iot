@@ -11,26 +11,7 @@
         "app": "iot",
         "page": "space-create"
       }
-    },
-    {
-      "key": "keyword",
-      "type": "text",
-      "placeholder": "请输入关键字"
-    },
-    {
-      "type": "button",
-      "icon": "search",
-      "label": "搜索",
-      "action": {
-        "type": "script",
-        "script": "this.keyword=this.toolbar.value.keyword; this.search()"
-      }
     }
-  ],
-  "keywords": [
-    "id",
-    "name",
-    "description"
   ],
   "operators": [
     {
@@ -73,16 +54,6 @@
       }
     },
     {
-      "key": "project_id",
-      "label": "项目ID",
-      "action": {
-        "type": "page",
-        "app": "iot",
-        "page": "project-detail",
-        "params_func": "return {id: data.project_id}"
-      }
-    },
-    {
       "key": "parent_id",
       "label": "父空间ID",
       "action": {
@@ -112,5 +83,5 @@
     }
   ],
   "search_api": "iot/space/search",
-  "mount": "this.filter.project_id=this.params.project_id"
+  "mount": "if(this.params.project_id)this.filter.project_id=this.params.project_id; if(this.params.parent_id)this.filter.parent_id=this.params.parent_id"
 }

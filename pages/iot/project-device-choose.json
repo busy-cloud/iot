@@ -13,10 +13,6 @@
   ],
   "columns": [
     {
-      "key": "project_id",
-      "label": "项目ID"
-    },
-    {
       "key": "device_id",
       "label": "设备ID"
     },

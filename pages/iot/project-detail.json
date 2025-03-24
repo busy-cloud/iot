@@ -53,6 +53,11 @@
       "app": "iot",
       "page": "project-device",
       "params_func": "return {project_id: params.id}"
+    },
+    {
+      "app": "iot",
+      "page": "project-user",
+      "params_func": "return {project_id: params.id}"
     }
   ]
 }

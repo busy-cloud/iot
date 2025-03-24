@@ -6,7 +6,7 @@ require (
 	github.com/busy-cloud/boat v0.2.9
 	github.com/busy-cloud/connector v0.2.6
 	github.com/busy-cloud/modbus v0.2.6
-	github.com/busy-cloud/user v0.2.1
+	github.com/busy-cloud/user v0.2.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/spf13/cast v1.7.1
 	github.com/spf13/viper v1.19.0

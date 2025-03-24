@@ -45,12 +45,14 @@
   ],
   "columns": [
     {
-      "key": "project_id",
-      "label": "项目ID"
-    },
-    {
       "key": "device_id",
-      "label": "设备ID"
+      "label": "设备ID",
+      "action": {
+        "type": "page",
+        "app": "iot",
+        "page": "device-detail",
+        "params_func": "return {id: data.device_id}"
+      }
     },
     {
       "key": "name",
