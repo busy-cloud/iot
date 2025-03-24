@@ -26,7 +26,7 @@ func init() {
 func spaceDeviceList(ctx *gin.Context) {
 	var pds []SpaceDevice
 	err := db.Engine().
-		Select("space_device.space_id, space_device.device_id, space_device.name, space_device.created, device.name as device").
+		Select("space_device.space_id, space_device.device_id, space_device.created, device.name as device").
 		Join("INNER", "device", "device.id=space_device.device_id").
 		Where("space_device.space_id=?", ctx.Param("id")).
 		Find(&pds)

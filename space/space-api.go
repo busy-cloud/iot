@@ -11,7 +11,7 @@ func init() {
 
 	api.Register("POST", "iot/space/search", curd.ApiSearchWith[Space]([]*curd.With{
 		{"space", "parent_id", "id", "name", "parent"},
-	}, "id", "name", "parent_id", "description", "disabled", "created"))
+	}, "id", "name", "project_id", "parent_id", "description", "disabled", "created"))
 	api.Register("GET", "iot/space/list", curd.ApiList[Space]())
 	api.Register("POST", "iot/space/create", curd.ApiCreate[Space]())
 	api.Register("GET", "iot/space/:id", curd.ApiGet[Space]())

@@ -111,5 +111,6 @@
       "type": "date"
     }
   ],
-  "search_api": "iot/space/search"
+  "search_api": "iot/space/search",
+  "mount": "this.filter.project_id=this.params.project_id"
 }
