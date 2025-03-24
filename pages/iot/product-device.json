@@ -1,5 +1,5 @@
 {
-  "title": "设备",
+  "title": "产品设备",
   "template": "table",
   "toolbar": [
     {
@@ -9,7 +9,8 @@
       "action": {
         "type": "page",
         "app": "iot",
-        "page": "device-create"
+        "page": "device-create",
+        "params_func": "return {product_id: this.params.product_id}"
       }
     },
     {
@@ -78,8 +79,8 @@
       "action": {
         "type": "page",
         "app": "iot",
-        "page": "product-detail",
-        "params_func": "return {id: data.product_id}"
+        "page": "device-detail",
+        "params_func": "return {id: data.id}"
       }
     },
     {
@@ -106,5 +107,6 @@
       "type": "date"
     }
   ],
-  "search_api": "iot/device/search"
+  "search_api": "iot/device/search",
+  "mount": "if(this.params.product_id)this.filter.product_id=this.params.product_id"
 }

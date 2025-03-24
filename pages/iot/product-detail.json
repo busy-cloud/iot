@@ -80,10 +80,9 @@
   "load_api": "iot/product/:id",
   "children": [
     {
-      "content": {
-        "title": "设备列表",
-        "template": "table"
-      }
+      "app": "iot",
+      "page": "product-device",
+      "params_func": "return {product_id: params.id}"
     }
   ]
 }
