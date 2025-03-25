@@ -8,6 +8,8 @@ github.com/busy-cloud/connector v0.2.6 h1:THs2FpDh4eJjmxkbsXA4BRkvbV/fDZJQ3ymBE8
 github.com/busy-cloud/connector v0.2.6/go.mod h1:UdmvvxGXrof8vhWdYUM38qGQEkuVJC1OWJpUFWNDJVI=
 github.com/busy-cloud/modbus v0.2.6 h1:9bPCkz+V38ZF2RxTgfLWWMIEV6cue9mUvNSder0ml0Q=
 github.com/busy-cloud/modbus v0.2.6/go.mod h1:ORDUdPyh9TjH29vcPe6OBacqvBD0ZBky7h5H0mU9y8U=
+github.com/busy-cloud/tsdb v0.0.4 h1:lf6IKK5nJRNFFFmvFTqXjg/Bbnx0I6cmf8ePyXxVJGE=
+github.com/busy-cloud/tsdb v0.0.4/go.mod h1:Hwqao0qJb4zWKHSoz69UHFjNsFF4ELqfva1CabcWkEw=
 github.com/busy-cloud/user v0.2.2 h1:3PQi6V0uIRMQbTwtCy16cnNV9HCeu0HK/10v6rKRQ44=
 github.com/busy-cloud/user v0.2.2/go.mod h1:VX5Z3Jb9vLuMxHT05Ud5vMkkt0BOeXqKGhPcanbGVgw=
 github.com/bytedance/sonic v1.12.10 h1:uVCQr6oS5669E9ZVW0HyksTLfNS7Q/9hV6IVS4nEMsI=
@@ -126,6 +128,8 @@ github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd h1:TRLaZ9cD/w
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9Gz0M=
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
+github.com/nakabonne/tstorage v0.3.6 h1:usp7pTohax8mynnFiUSUQ2QVBCKLCkYx3gmb3+rJo54=
+github.com/nakabonne/tstorage v0.3.6/go.mod h1:1xUrK3s1MXSlU6dn96xHerHx/MdO4BGmsAHEUbsaOxU=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.7.0 h1:WSHQ+IS43OoUrWtD1/bbclrwK8TTH5hzp+umCiuxHgs=
 github.com/onsi/ginkgo v1.7.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
