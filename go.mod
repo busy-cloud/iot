@@ -3,6 +3,7 @@ module github.com/busy-cloud/iot
 go 1.23.0
 
 require (
+	github.com/PaesslerAG/gval v1.2.4
 	github.com/busy-cloud/boat v0.2.10
 	github.com/busy-cloud/connector v0.2.6
 	github.com/busy-cloud/influxdb v0.2.3
@@ -69,6 +70,7 @@ require (
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
 	github.com/shirou/gopsutil/v4 v4.25.2 // indirect
+	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.12.0 // indirect

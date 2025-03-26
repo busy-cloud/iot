@@ -28,11 +28,26 @@
           "type": "select",
           "default": "number",
           "options": [
-            {"label": "布尔","value": "bool"},
-            {"label": "字符串","value": "string"},
-            {"label": "数值","value": "number"},
-            {"label": "数组","value": "array"},
-            {"label": "对象","value": "object"}
+            {
+              "label": "布尔",
+              "value": "bool"
+            },
+            {
+              "label": "字符串",
+              "value": "string"
+            },
+            {
+              "label": "数值",
+              "value": "number"
+            },
+            {
+              "label": "数组",
+              "value": "array"
+            },
+            {
+              "label": "对象",
+              "value": "object"
+            }
           ]
         },
         {
@@ -40,6 +55,79 @@
           "label": "精度",
           "type": "number",
           "default": 0
+        }
+      ]
+    },
+    {
+      "key": "validators",
+      "label": "属性检查",
+      "type": "table",
+      "children": [
+        {
+          "key": "expression",
+          "label": "表达式",
+          "type": "text"
+        },
+        {
+          "key": "title",
+          "label": "报警标题",
+          "type": "text"
+        },
+        {
+          "key": "message",
+          "label": "报警内容",
+          "type": "text"
+        },
+        {
+          "key": "level",
+          "label": "报警等级",
+          "type": "select",
+          "default": 3,
+          "options": [
+            {
+              "label": "一级",
+              "value": 1
+            },
+            {
+              "label": "二级",
+              "value": 2
+            },
+            {
+              "label": "三级",
+              "value": 3
+            },
+            {
+              "label": "四级",
+              "value": 4
+            },
+            {
+              "label": "五级",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "key": "delay",
+          "type": "number",
+          "label": "延迟报警s",
+          "default": 60
+        },
+        {
+          "key": "reset",
+          "type": "number",
+          "label": "报警重置s",
+          "default": 0
+        },
+        {
+          "key": "reset_times",
+          "type": "number",
+          "label": "报警重置次数",
+          "default": 0
+        },
+        {
+          "key": "disabled",
+          "label": "禁用",
+          "type": "switch"
         }
       ]
     }
