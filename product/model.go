@@ -1,6 +1,11 @@
 package product
 
-import "time"
+import (
+	"errors"
+	"github.com/busy-cloud/boat/db"
+	"github.com/busy-cloud/boat/lib"
+	"time"
+)
 
 // Property 属性
 type Property struct {
@@ -40,4 +45,30 @@ type ProductModel struct {
 	Validators []*Validator `json:"validators,omitempty" xorm:"json"`
 	Updated    time.Time    `json:"updated,omitempty" xorm:"updated"`
 	Created    time.Time    `json:"created,omitempty" xorm:"created"`
+}
+
+var modelCache = lib.Cache[ProductModel]{
+	Timeout: int64(time.Minute * 10),
+}
+
+func LoadModel(id string) (*ProductModel, error) {
+	m, has := modelCache.Load(id)
+	if has {
+		return m, nil
+	}
+
+	var pm ProductModel
+
+	has, err := db.Engine().ID(id).Get(&pm)
+	if err != nil {
+		return nil, err
+	}
+	if !has {
+		return nil, errors.New("缺少映射")
+	}
+
+	//缓存下来
+	modelCache.Store(id, &pm)
+
+	return &pm, nil
 }

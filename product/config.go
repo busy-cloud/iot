@@ -9,52 +9,53 @@ import (
 	"xorm.io/xorm/schemas"
 )
 
-type _config struct {
-	load    int64
-	content any
+var configCache = lib.Cache[ProductConfig]{
+	Timeout: int64(time.Minute * 10),
 }
 
-var cache lib.Map[_config]
-
-func LoadConfig[T any](id, config string) (error, *T) {
+func LoadConfig[T any](id, config string) (*T, error) {
 	idd := id + "/" + config
 
-	c := cache.Load(idd)
-	if c != nil {
-		now := time.Now().Unix()
-		// 10分钟内，不会重查
-		if now-c.load < 60*10 {
-			return nil, c.content.(*T)
+	c, has := configCache.Load(idd)
+	if has {
+		//这里转来转去
+		buf, err := json.Marshal(c.Content)
+		if err != nil {
+			return nil, err
 		}
+
+		var t T
+		err = json.Unmarshal(buf, &t)
+		if err != nil {
+			return nil, err
+		}
+
 	}
 
 	var cfg ProductConfig
 
 	has, err := db.Engine().ID(schemas.PK{id, config}).Get(&cfg)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	if !has {
-		return errors.New("缺少映射"), nil
+		return nil, errors.New("缺少映射")
 	}
 
 	//这里转来转去
 	buf, err := json.Marshal(cfg.Content)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 
 	var t T
 	err = json.Unmarshal(buf, &t)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 
 	//缓存下来
-	cache.Store(idd, &_config{
-		load:    time.Now().Unix(),
-		content: &t,
-	})
+	configCache.Store(idd, &cfg)
 
-	return nil, &t
+	return &t, nil
 }
