@@ -59,9 +59,10 @@
       }
     }
   ],
+  "tooltip": true,
   "time": true,
   "mount": "this.toolbarValue = {start:this.dayjs().subtract(1, 'day').format('YYYY-MM-DD HH:mm:ss')}; setTimeout(()=>this.load_history(), 100)",
   "methods": {
-    "load_history": "this.request.get('iot/device/'+this.params.id+'/history/'+this.params.point, {start:this.dayjs(this.toolbar.value.start).format('YYYY-MM-DD HH:mm:ss'), end:this.dayjs(this.toolbar.value.end).format('YYYY-MM-DD HH:mm:ss'), window:this.toolbar.value.window+this.toolbar.value.unit, method:this.toolbar.value.method}).subscribe(res=>{this.render(res.data.map(i=>{return [i.time, i.value]}))})"
+    "load_history": "this.request.get('iot/device/'+this.params.id+'/history/'+this.params.point, {start:this.dayjs(this.toolbar.value.start).format('YYYY-MM-DD HH:mm:ss'), end:this.dayjs(this.toolbar.value.end).format('YYYY-MM-DD HH:mm:ss'), window:this.toolbar.value.window+this.toolbar.value.unit, method:this.toolbar.value.method}).subscribe(res=>{this.render(res.data.map(i=>{return [i.time/1000, i.value]}))})"
   }
 }
