@@ -8,8 +8,8 @@ github.com/busy-cloud/connector v0.2.6 h1:THs2FpDh4eJjmxkbsXA4BRkvbV/fDZJQ3ymBE8
 github.com/busy-cloud/connector v0.2.6/go.mod h1:UdmvvxGXrof8vhWdYUM38qGQEkuVJC1OWJpUFWNDJVI=
 github.com/busy-cloud/modbus v0.2.6 h1:9bPCkz+V38ZF2RxTgfLWWMIEV6cue9mUvNSder0ml0Q=
 github.com/busy-cloud/modbus v0.2.6/go.mod h1:ORDUdPyh9TjH29vcPe6OBacqvBD0ZBky7h5H0mU9y8U=
-github.com/busy-cloud/tsdb v0.0.5 h1:bbqZ/0r2r4FrIjJIqA19pu9+Fwy3Ub8SXL3HbUzGyZ4=
-github.com/busy-cloud/tsdb v0.0.5/go.mod h1:Hwqao0qJb4zWKHSoz69UHFjNsFF4ELqfva1CabcWkEw=
+github.com/busy-cloud/tsdb v0.0.6 h1:8371Lrsma1vGPWWq1AaPpqhUTe7jBAcGCRi4s1dJw7E=
+github.com/busy-cloud/tsdb v0.0.6/go.mod h1:Hwqao0qJb4zWKHSoz69UHFjNsFF4ELqfva1CabcWkEw=
 github.com/busy-cloud/user v0.2.2 h1:3PQi6V0uIRMQbTwtCy16cnNV9HCeu0HK/10v6rKRQ44=
 github.com/busy-cloud/user v0.2.2/go.mod h1:VX5Z3Jb9vLuMxHT05Ud5vMkkt0BOeXqKGhPcanbGVgw=
 github.com/bytedance/sonic v1.12.10 h1:uVCQr6oS5669E9ZVW0HyksTLfNS7Q/9hV6IVS4nEMsI=
