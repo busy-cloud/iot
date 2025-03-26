@@ -3,10 +3,10 @@ module github.com/busy-cloud/iot
 go 1.23.0
 
 require (
-	github.com/busy-cloud/boat v0.2.9
+	github.com/busy-cloud/boat v0.2.10
 	github.com/busy-cloud/connector v0.2.6
+	github.com/busy-cloud/influxdb v0.2.3
 	github.com/busy-cloud/modbus v0.2.6
-	github.com/busy-cloud/tsdb v0.0.6
 	github.com/busy-cloud/user v0.2.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/spf13/cast v1.7.1
@@ -16,6 +16,7 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
+	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/bytedance/sonic v1.12.10 // indirect
 	github.com/bytedance/sonic/loader v0.2.3 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
@@ -43,6 +44,8 @@ require (
 	github.com/gorilla/sessions v1.4.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/influxdata/influxdb-client-go/v2 v2.14.0 // indirect
+	github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 // indirect
 	github.com/jonboulle/clockwork v0.5.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
@@ -55,7 +58,7 @@ require (
 	github.com/mochi-mqtt/server/v2 v2.7.9 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nakabonne/tstorage v0.3.6 // indirect
+	github.com/oapi-codegen/runtime v1.0.0 // indirect
 	github.com/panjf2000/ants/v2 v2.11.1 // indirect
 	github.com/panjf2000/gnet/v2 v2.7.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
