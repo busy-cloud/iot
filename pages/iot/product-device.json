@@ -79,8 +79,8 @@
       "action": {
         "type": "page",
         "app": "iot",
-        "page": "device-detail",
-        "params_func": "return {id: data.id}"
+        "page": "product-detail",
+        "params_func": "return {id: data.product_id}"
       }
     },
     {
