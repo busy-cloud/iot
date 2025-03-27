@@ -5,6 +5,7 @@ import (
 	"github.com/busy-cloud/boat/lib"
 	"github.com/busy-cloud/boat/mqtt"
 	"github.com/busy-cloud/iot/device"
+	"github.com/busy-cloud/iot/product"
 	"github.com/busy-cloud/iot/project"
 	"github.com/busy-cloud/iot/space"
 	"time"
@@ -24,6 +25,8 @@ type Device struct {
 
 	projects []string
 	spaces   []string
+
+	model *product.ProductModel
 }
 
 func (d *Device) Open() error {
@@ -46,6 +49,12 @@ func (d *Device) Open() error {
 	}
 	for _, s := range ss {
 		d.spaces = append(d.spaces, s.SpaceId)
+	}
+
+	//加载物模型
+	d.model, err = product.LoadModel(d.ProductId)
+	if err != nil {
+		return err
 	}
 
 	return nil
