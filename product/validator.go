@@ -70,6 +70,9 @@ func (v *Validator) Evaluate(ctx map[string]any) (*Alarm, error) {
 
 	switch v.Type {
 	case "compare":
+		if v.expression == nil {
+			return nil, fmt.Errorf("invalid compare expression")
+		}
 		ret, err = v.expression.EvalBool(context.Background(), ctx)
 	case "expression":
 		ret, err = v.Compare.Evaluate(ctx)
