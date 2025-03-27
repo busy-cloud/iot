@@ -3,6 +3,7 @@ package internal
 import (
 	"github.com/busy-cloud/boat/db"
 	"github.com/busy-cloud/boat/lib"
+	"github.com/busy-cloud/boat/log"
 	"github.com/busy-cloud/boat/mqtt"
 	"github.com/busy-cloud/iot/device"
 	"github.com/busy-cloud/iot/product"
@@ -26,10 +27,12 @@ type Device struct {
 	projects []string
 	spaces   []string
 
-	model *product.ProductModel
+	model      *product.ProductModel
+	validators []*Validator
 }
 
 func (d *Device) Open() error {
+	d.Values = make(map[string]any)
 
 	//查询绑定的项目
 	var ps []*project.ProjectDevice
@@ -57,15 +60,26 @@ func (d *Device) Open() error {
 		return err
 	}
 
+	//复制
+	for _, v := range d.model.Validators {
+		vv := &Validator{Validator: v}
+		d.validators = append(d.validators, vv)
+		err = vv.Build() //重复编译了
+		if err != nil {
+			log.Error(err)
+		}
+	}
+
 	return nil
 }
 
 func (d *Device) PutValues(values map[string]any) {
-	d.Values = values
-	d.Updated = time.Now()
+
+	//TODO 过滤器实现
 
 	//广播消息
 	var topics []string
+	topics = append(topics, "device/"+d.Id+"/values")
 	for _, p := range d.projects {
 		topics = append(topics, "project/"+p+"/device/"+d.Id+"/property")
 	}
@@ -74,5 +88,29 @@ func (d *Device) PutValues(values map[string]any) {
 	}
 	if len(topics) > 0 {
 		mqtt.PublishEx(topics, values)
+	}
+
+	//更新数据
+	for k, v := range values {
+		d.Values[k] = v
+	}
+	d.Values["__update"] = time.Now()
+
+	//检查属性
+	for _, v := range d.validators {
+		alarm, err := v.Evaluate(d.Values)
+		if err != nil {
+			log.Error(err)
+		}
+		if alarm != nil {
+			var topics []string
+			topics = append(topics, "device/"+d.Id+"/alarm")
+			for _, p := range d.projects {
+				topics = append(topics, "project/"+p+"/device/"+d.Id+"/alarm")
+			}
+			mqtt.PublishEx(topics, alarm)
+
+			//todo 入数据库
+		}
 	}
 }

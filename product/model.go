@@ -58,6 +58,7 @@ var modelCache = lib.CacheLoader[ProductModel]{
 		if !has {
 			return nil, fmt.Errorf("empty product model %s", key)
 		}
+
 		return &pm, nil
 	},
 }
