@@ -1,7 +1,7 @@
 package product
 
 import (
-	"errors"
+	"fmt"
 	"github.com/busy-cloud/boat/db"
 	"github.com/busy-cloud/boat/lib"
 	"time"
@@ -48,7 +48,7 @@ type ProductModel struct {
 }
 
 var modelCache = lib.CacheLoader[ProductModel]{
-	Timeout: int64(time.Minute * 10),
+	Timeout: 600,
 	Loader: func(key string) (*ProductModel, error) {
 		var pm ProductModel
 		has, err := db.Engine().ID(key).Get(&pm)
@@ -56,7 +56,7 @@ var modelCache = lib.CacheLoader[ProductModel]{
 			return nil, err
 		}
 		if !has {
-			return nil, errors.New("缺少映射")
+			return nil, fmt.Errorf("empty product model %s", key)
 		}
 		return &pm, nil
 	},

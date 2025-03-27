@@ -2,16 +2,15 @@ package product
 
 import (
 	"encoding/json"
-	"errors"
+	"fmt"
 	"github.com/busy-cloud/boat/db"
 	"github.com/busy-cloud/boat/lib"
 	"strings"
-	"time"
 	"xorm.io/xorm/schemas"
 )
 
 var configCache = lib.CacheLoader[ProductConfig]{
-	Timeout: int64(time.Minute * 10),
+	Timeout: 600,
 	Loader: func(key string) (*ProductConfig, error) {
 		var cfg ProductConfig
 		ss := strings.Split(key, "/")
@@ -20,7 +19,7 @@ var configCache = lib.CacheLoader[ProductConfig]{
 			return nil, err
 		}
 		if !has {
-			return nil, errors.New("找不到")
+			return nil, fmt.Errorf("empty product config %s", key)
 		}
 		return &cfg, nil
 	},
