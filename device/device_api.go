@@ -3,6 +3,8 @@ package device
 import (
 	"github.com/busy-cloud/boat/api"
 	"github.com/busy-cloud/boat/curd"
+	"github.com/busy-cloud/boat/db"
+	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -14,4 +16,30 @@ func init() {
 	api.Register("GET", "iot/device/:id/delete", curd.ApiDelete[Device]())
 	api.Register("GET", "iot/device/:id/enable", curd.ApiDisable[Device](false))
 	api.Register("GET", "iot/device/:id/disable", curd.ApiDisable[Device](true))
+
+	//物模型
+	api.Register("GET", "iot/device/:id/model", curd.ApiGet[DeviceModel]())
+	api.Register("POST", "iot/device/:id/model", deviceModelUpdate)
+
+}
+
+func deviceModelUpdate(ctx *gin.Context) {
+	id := ctx.Param("id")
+
+	var model DeviceModel
+	err := ctx.ShouldBind(&model)
+	if err != nil {
+		api.Error(ctx, err)
+		return
+	}
+	model.Id = id
+
+	_, err = db.Engine().ID(id).Delete(new(DeviceModel)) //不管有没有都删掉
+	_, err = db.Engine().ID(id).Insert(&model)
+	if err != nil {
+		api.Error(ctx, err)
+		return
+	}
+
+	api.OK(ctx, &model)
 }

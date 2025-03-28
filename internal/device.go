@@ -27,7 +27,6 @@ type Device struct {
 	projects []string
 	spaces   []string
 
-	model      *product.ProductModel
 	validators []*Validator
 }
 
@@ -54,19 +53,36 @@ func (d *Device) Open() error {
 		d.spaces = append(d.spaces, s.SpaceId)
 	}
 
-	//加载物模型
-	d.model, err = product.LoadModel(d.ProductId)
+	//加载产品物模型
+	productModel, err := product.LoadModel(d.ProductId)
 	if err != nil {
 		return err
 	}
 
 	//复制
-	for _, v := range d.model.Validators {
+	for _, v := range productModel.Validators {
 		vv := &Validator{Validator: v}
 		d.validators = append(d.validators, vv)
 		err = vv.Build() //重复编译了
 		if err != nil {
 			log.Error(err)
+		}
+	}
+
+	//加载设备模型
+	var deviceModel device.DeviceModel
+	has, err := db.Engine().ID(d.Id).Get(&deviceModel)
+	if err != nil {
+		return err
+	}
+	if has {
+		for _, v := range deviceModel.Validators {
+			vv := &Validator{Validator: v}
+			d.validators = append(d.validators, vv)
+			err = vv.Build() //重复编译了
+			if err != nil {
+				log.Error(err)
+			}
 		}
 	}
 

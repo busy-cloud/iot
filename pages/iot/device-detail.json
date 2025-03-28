@@ -22,6 +22,17 @@
         "type": "script",
         "script": "this.request.get('iot/device/'+data.id+'/delete').subscribe(res=>{this.navigate('/page/iot/device')})"
       }
+    },
+    {
+      "icon": "build",
+      "type": "button",
+      "label": "设备物模型",
+      "action": {
+        "type": "page",
+        "app": "iot",
+        "page": "device-model",
+        "params_func": "return {id: data.id}"
+      }
     }
   ],
   "items": [

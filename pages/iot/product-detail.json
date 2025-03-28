@@ -16,7 +16,7 @@
     {
       "icon": "build",
       "type": "button",
-      "label": "物模型",
+      "label": "产品物模型",
       "action": {
         "type": "page",
         "app": "iot",
@@ -27,7 +27,7 @@
     {
       "icon": "api",
       "type": "button",
-      "label": "协议配置",
+      "label": "产品协议配置",
       "action": {
         "type": "page",
         "app": "iot",
