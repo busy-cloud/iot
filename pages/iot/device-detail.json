@@ -98,10 +98,9 @@
       "params_func": "return {id: params.id}"
     },
     {
-      "content": {
-        "title": "设备日志",
-        "template": "table"
-      }
+      "app": "iot",
+      "page": "alarm",
+      "params_func": "return {device_id: params.id}"
     }
   ]
 }

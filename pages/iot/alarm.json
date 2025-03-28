@@ -18,9 +18,8 @@
     }
   ],
   "keywords": [
-    "device_id",
-    "name",
-    "description"
+    "title",
+    "message"
   ],
   "operators": [
     {
@@ -36,13 +35,7 @@
   "columns": [
     {
       "key": "id",
-      "label": "ID",
-      "action": {
-        "type": "page",
-        "app": "iot",
-        "page": "device-detail",
-        "params_func": "return {id: data.id}"
-      }
+      "label": "ID"
     },
     {
       "key": "device_id",
@@ -82,5 +75,6 @@
       "type": "date"
     }
   ],
-  "search_api": "iot/alarm/search"
+  "search_api": "iot/alarm/search",
+  "mount": "if(this.params.device_id)this.filter.device_id=this.params.device_id;if(this.params.project_id)this.filter.project_id=this.params.project_id;"
 }

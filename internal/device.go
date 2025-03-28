@@ -61,6 +61,9 @@ func (d *Device) Open() error {
 
 	//复制
 	for _, v := range productModel.Validators {
+		if v.Disabled {
+			continue
+		}
 		vv := &Validator{Validator: v}
 		d.validators = append(d.validators, vv)
 		err = vv.Build() //重复编译了
@@ -77,6 +80,9 @@ func (d *Device) Open() error {
 	}
 	if has {
 		for _, v := range deviceModel.Validators {
+			if v.Disabled {
+				continue
+			}
 			vv := &Validator{Validator: v}
 			d.validators = append(d.validators, vv)
 			err = vv.Build() //重复编译了
