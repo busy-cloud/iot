@@ -81,7 +81,7 @@ func (v *Validator) Evaluate(ctx map[string]any) (*Alarm, error) {
 		}
 
 		//超过最大次数
-		if v.ResetTimes > 0 && v.times >= v.ResetTimes {
+		if v.ResetTimes > 0 && v.times > v.ResetTimes {
 			return nil, nil
 		}
 
