@@ -8,8 +8,12 @@
       "url": "page/iot/device"
     },
     {
-      "name": "项目",
+      "name": "项目空间",
       "url": "page/iot/project"
+    },
+    {
+      "name": "报警日志",
+      "url": "page/iot/alarm"
     },
     {
       "name": "产品库",

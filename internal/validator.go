@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/PaesslerAG/gval"
+	"github.com/busy-cloud/iot/alarm"
 	"github.com/busy-cloud/iot/calc"
 	"github.com/busy-cloud/iot/product"
 	"github.com/spf13/cast"
@@ -28,7 +29,7 @@ func (v *Validator) Build() (err error) {
 	return err
 }
 
-func (v *Validator) Evaluate(ctx map[string]any) (*Alarm, error) {
+func (v *Validator) Evaluate(ctx map[string]any) (*alarm.Alarm, error) {
 	var err error
 	var ret bool
 
@@ -97,19 +98,13 @@ func (v *Validator) Evaluate(ctx map[string]any) (*Alarm, error) {
 	v.times = v.times + 1
 
 	//产生报警
-	alarm := &Alarm{
+	a := &alarm.Alarm{
 		Title:   replaceParams(v.Title, ctx),
 		Message: replaceParams(v.Message, ctx),
 		Level:   v.Level,
 	}
 
-	return alarm, nil
-}
-
-type Alarm struct {
-	Title   string `json:"title,omitempty"`
-	Message string `json:"message,omitempty"`
-	Level   int    `json:"level,omitempty"`
+	return a, nil
 }
 
 var paramsRegex *regexp.Regexp

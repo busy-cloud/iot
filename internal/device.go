@@ -119,14 +119,23 @@ func (d *Device) PutValues(values map[string]any) {
 			log.Error(err)
 		}
 		if alarm != nil {
+			alarm.Device = d.Name
+			alarm.DeviceId = d.Id
+
 			var topics []string
 			topics = append(topics, "device/"+d.Id+"/alarm")
 			for _, p := range d.projects {
+				alarm.ProjectId = p //TODO 多项目，会被覆盖掉
 				topics = append(topics, "project/"+p+"/device/"+d.Id+"/alarm")
 			}
-			mqtt.PublishEx(topics, alarm)
 
-			//todo 入数据库
+			//入数据库
+			_, err = db.Engine().InsertOne(alarm)
+			if err != nil {
+				log.Error(err)
+			}
+
+			mqtt.PublishEx(topics, alarm)
 		}
 	}
 }
