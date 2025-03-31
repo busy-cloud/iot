@@ -34,6 +34,8 @@ func init() {
 						api.Error(ctx, err)
 						return
 					}
+
+					ps = append(ps, &menu)
 				}
 			}
 		}

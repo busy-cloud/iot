@@ -4,6 +4,7 @@ import (
 	"embed"
 	"github.com/busy-cloud/boat/menu"
 	"github.com/busy-cloud/boat/page"
+	_ "github.com/busy-cloud/iot/app"
 	_ "github.com/busy-cloud/iot/internal"
 	"github.com/busy-cloud/iot/protocol"
 )
