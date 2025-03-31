@@ -43,6 +43,15 @@ func init() {
 		api.OK(ctx, as)
 	})
 
+	api.Register("GET", "iot/app/:app", func(ctx *gin.Context) {
+		app, err := ReadManifest(filepath.Join(APP_PATH, ctx.Param("app")+APP_EXT))
+		if err != nil {
+			api.Error(ctx, err)
+			return
+		}
+		api.OK(ctx, app)
+	})
+
 	api.Register("GET", "iot/app/:app/icon", func(ctx *gin.Context) {
 		reader, err := zip.OpenReader(filepath.Join(APP_PATH, ctx.Param("app")+APP_EXT))
 		if err != nil {
