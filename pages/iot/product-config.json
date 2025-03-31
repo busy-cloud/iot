@@ -8,6 +8,6 @@
   "submit_success": "this.navigate('/page/iot/product-detail?id='+data.id)",
   "mount": "this.load_config_form()",
   "methods": {
-    "load_config_form": "this.request.get('iot/protocol/'+this.params.config+'/config').subscribe(res=>{this.content.fields = res.data.fields})"
+    "load_config_form": "this.request.get('iot/protocol/'+this.params.config).subscribe(res=>{this.content.fields = res.model})"
   }
 }

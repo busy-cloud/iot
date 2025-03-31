@@ -10,6 +10,7 @@ import (
 	_ "github.com/busy-cloud/connector"
 	_ "github.com/busy-cloud/influxdb"
 	_ "github.com/busy-cloud/iot/internal"
+	"github.com/busy-cloud/iot/protocol"
 	_ "github.com/busy-cloud/modbus"
 	//_ "github.com/busy-cloud/tsdb"
 	_ "github.com/busy-cloud/user"
@@ -24,6 +25,8 @@ func init() {
 	page.Dir("pages", "")
 
 	menu.Dir("menus", "")
+
+	protocol.Dir("protocols", "")
 }
 
 func main() {
