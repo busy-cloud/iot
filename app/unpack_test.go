@@ -2,8 +2,8 @@ package app
 
 import "testing"
 
-func TestPack(t *testing.T) {
-	err := Pack("../bin", "app.zip")
+func TestUnpack(t *testing.T) {
+	err := Verify("app.zip")
 	if err != nil {
 		t.Error(err)
 	}

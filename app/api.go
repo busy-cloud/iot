@@ -62,6 +62,7 @@ func init() {
 		defer reader.Close()
 
 		//ctx.Writer.WriteHeader(http.StatusNotModified)
+		//reader.File[0].Comment
 
 		file, err := reader.Open(APP_ICON)
 		if err != nil {
