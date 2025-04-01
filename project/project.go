@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	db.Register(new(Project), new(ProjectUser), new(ProjectDevice))
+	db.Register(new(Project), new(ProjectUser), new(ProjectDevice), new(ProjectApp))
 }
 
 type Project struct {
@@ -34,5 +34,12 @@ type ProjectDevice struct {
 	DeviceId  string    `json:"device_id,omitempty" xorm:"pk"`
 	Device    string    `json:"device,omitempty" xorm:"<-"`
 	Name      string    `json:"name,omitempty"` //编程别名
+	Created   time.Time `json:"created" xorm:"created"`
+}
+
+type ProjectApp struct {
+	ProjectId string    `json:"project_id,omitempty" xorm:"pk"`
+	AppId     string    `json:"app_id,omitempty" xorm:"pk"`
+	Disabled  bool      `json:"disabled,omitempty"`
 	Created   time.Time `json:"created" xorm:"created"`
 }

@@ -11,7 +11,7 @@
         "app": "iot",
         "page": "project-device-choose",
         "params_func": "return {project_id: this.space.project_id}",
-        "after_close": "this.request.get('iot/space/'+this.params.space_id+'/device/'+result.device_id+'/bind').subscribe(res=>this.refresh())"
+        "after_close": "this.request.get('iot/space/'+this.params.space_id+'/device/'+result.device_id+'/bind').subscribe(res=>this.load())"
       }
     }
   ],
@@ -40,7 +40,7 @@
       "confirm": "确认解绑？",
       "action": {
         "type": "script",
-        "script": "this.request.get('iot/space/'+data.space_id+'/device/'+data.device_id+'/unbind').subscribe(res=>this.refresh())"
+        "script": "this.request.get('iot/space/'+data.space_id+'/device/'+data.device_id+'/unbind').subscribe(res=>this.load())"
       }
     }
   ],

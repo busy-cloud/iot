@@ -10,7 +10,7 @@
         "type": "dialog",
         "app": "iot",
         "page": "device-choose",
-        "after_close": "this.request.get('iot/project/'+this.params.project_id+'/device/'+result.id+'/bind').subscribe(res=>this.refresh())"
+        "after_close": "this.request.get('iot/project/'+this.params.project_id+'/device/'+result.id+'/bind').subscribe(res=>this.load())"
       }
     }
   ],
@@ -39,7 +39,7 @@
       "confirm": "确认解绑？",
       "action": {
         "type": "script",
-        "script": "this.request.get('iot/project/'+data.project_id+'/device/'+data.device_id+'/unbind').subscribe(res=>this.refresh())"
+        "script": "this.request.get('iot/project/'+data.project_id+'/device/'+data.device_id+'/unbind').subscribe(res=>this.load())"
       }
     }
   ],

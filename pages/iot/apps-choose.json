@@ -1,11 +1,14 @@
 {
-  "title": "应用列表",
+  "title": "应用选择",
   "template": "table",
-  "toolbar": [
+  "operators": [
     {
-      "label": "上传",
-      "icon": "upload",
-      "type": "button"
+      "icon": "check",
+      "label": "选择",
+      "action": {
+        "type": "script",
+        "script": "this.modelRef.close(data)"
+      }
     }
   ],
   "columns": [
@@ -16,11 +19,7 @@
     },
     {
       "key": "id",
-      "label": "ID",
-      "action": {
-        "type": "script",
-        "script": "window.open('/app/'+data.id)"
-      }
+      "label": "ID"
     },
     {
       "key": "name",

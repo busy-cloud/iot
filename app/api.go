@@ -37,6 +37,7 @@ func init() {
 				log.Error(err)
 				continue
 			}
+
 			as = append(as, app)
 		}
 
