@@ -94,7 +94,7 @@ func Pack(dir string, out string) error {
 	}
 
 	//写入hash文件
-	w, err := zipWriter.Create("__LIST__")
+	w, err := zipWriter.Create(ListName)
 	if err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ func Pack(dir string, out string) error {
 
 	sign := ed25519.Sign(priKey, list.Bytes())
 	//写入签名文件
-	w, err = zipWriter.Create("__SIGN__")
+	w, err = zipWriter.Create(SignName)
 	if err != nil {
 		return err
 	}

@@ -3,58 +3,39 @@ package app
 import (
 	"archive/zip"
 	"github.com/busy-cloud/boat/api"
-	"github.com/busy-cloud/boat/log"
 	"github.com/gin-gonic/gin"
 	"io"
-	"os"
 	"path/filepath"
 	"time"
 )
 
+const gmtFormat = "Mon, 02 Jan 2006 15:04:05 GMT"
+
 func init() {
 
-	now := time.Now()
+	//启动时间作为默认图标的修改时间
+	bootTime := time.Now()
 
 	api.Register("GET", "iot/app/list", func(ctx *gin.Context) {
 		var as []*Manifest
-
-		entries, err := os.ReadDir(APP_PATH)
-		if err != nil {
-			api.Error(ctx, err)
-			return
-		}
-
-		for _, entry := range entries {
-			if entry.IsDir() {
-				continue
-			}
-			ext := filepath.Ext(entry.Name())
-			if ext != APP_EXT {
-				continue
-			}
-			app, err := ReadManifest(entry.Name())
-			if err != nil {
-				log.Error(err)
-				continue
-			}
-
-			as = append(as, app)
-		}
-
+		apps.Range(func(name string, item *App) bool {
+			as = append(as, &item.Manifest)
+			return true
+		})
 		api.OK(ctx, as)
 	})
 
 	api.Register("GET", "iot/app/:app", func(ctx *gin.Context) {
-		app, err := ReadManifest(filepath.Join(APP_PATH, ctx.Param("app")+APP_EXT))
+		app, err := Load(ctx.Param("app"))
 		if err != nil {
 			api.Error(ctx, err)
 			return
 		}
-		api.OK(ctx, app)
+		api.OK(ctx, app.Manifest)
 	})
 
 	api.Register("GET", "iot/app/:app/icon", func(ctx *gin.Context) {
-		reader, err := zip.OpenReader(filepath.Join(APP_PATH, ctx.Param("app")+APP_EXT))
+		reader, err := zip.OpenReader(filepath.Join(RootPath, ctx.Param("app")+Extension))
 		if err != nil {
 			_ = ctx.Error(err)
 			return
@@ -64,13 +45,13 @@ func init() {
 		//ctx.Writer.WriteHeader(http.StatusNotModified)
 		//reader.File[0].Comment
 
-		file, err := reader.Open(APP_ICON)
+		file, err := reader.Open(IconName)
 		if err != nil {
 			//return nil, err
 			//return icon, nil //使用默认图片
-			ctx.Header("Last-Modified", now.UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT"))
+			ctx.Header("Last-Modified", bootTime.UTC().Format(gmtFormat))
 			ctx.Header("Content-Type", "image/png")
-			_, _ = ctx.Writer.Write(icon)
+			_, _ = ctx.Writer.Write(defaultIcon)
 			return
 		}
 		defer file.Close()
@@ -82,7 +63,7 @@ func init() {
 			return
 		}
 
-		ctx.Header("Last-Modified", st.ModTime().UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT"))
+		ctx.Header("Last-Modified", st.ModTime().UTC().Format(gmtFormat))
 		ctx.Header("Content-Type", "image/png")
 		_, _ = ctx.Writer.Write(buf)
 	})

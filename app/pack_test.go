@@ -3,7 +3,7 @@ package app
 import "testing"
 
 func TestPack(t *testing.T) {
-	err := Pack("../bin", "app.zip")
+	err := Pack("../apps", "test2.app")
 	if err != nil {
 		t.Error(err)
 	}
