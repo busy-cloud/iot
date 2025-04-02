@@ -16,6 +16,7 @@ import (
 	"io"
 	"io/ioutil"
 	"mime"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -83,6 +84,7 @@ func (a *App) ServeFile(path string, ctx *gin.Context) error {
 	st, _ := file.Stat()
 	ctx.Header("Last-Modified", st.ModTime().UTC().Format(gmtFormat))
 	ctx.Header("Content-Type", mime.TypeByExtension(filepath.Ext(path)))
+	ctx.Writer.WriteHeader(http.StatusOK)
 
 	_, err = io.Copy(ctx.Writer, file)
 	return err
