@@ -25,6 +25,11 @@ func Startup() error {
 		return err
 	}
 
+	err = LoadLicenses()
+	if err != nil {
+		return err
+	}
+
 	//注册APP代理
 	web.Engine().Use(Proxy)
 

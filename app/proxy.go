@@ -1,7 +1,10 @@
 package app
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
 	"strings"
 )
 
@@ -31,10 +34,14 @@ func Proxy(ctx *gin.Context) {
 		if p := apps.Load(app); p != nil {
 			err := p.ServeFile(path, ctx)
 			if err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					ctx.String(http.StatusNotFound, "app source not found")
+					ctx.Abort()
+					return
+				}
 				_ = ctx.Error(err)
-			} else {
-				ctx.Abort()
 			}
+			ctx.Abort()
 		}
 	}
 }
