@@ -15,7 +15,7 @@ import (
 )
 
 const RootPath = "apps"
-const Extension = ".app"
+const Extension = ".ipk"
 const ManifestName = "manifest.json"
 const IconName = "icon.png"
 const ListName = "__LIST__"
