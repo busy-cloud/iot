@@ -15,7 +15,7 @@ var pages embed.FS
 //go:embed menus
 var menus embed.FS
 
-//go:embed menus
+//go:embed protocols
 var protocols embed.FS
 
 func init() {
